@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/blue_grey_700"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/statusTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:gravity="center"
+        android:text=""
+        android:textColor="@android:color/white"
+        android:textSize="36sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="HELP" />
+
+    <ScrollView
+        android:id="@+id/signInFormScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        app:layout_constraintTop_toBottomOf="@+id/statusTextView"
+        tools:layout_editor_absoluteX="16dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:id="@+id/birthdayLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:id="@+id/birthdayTextView"
+                    style="@style/sign_in_form_text"
+                    android:text="@string/birthday" />
+
+                <EditText
+                    android:id="@+id/birthDateEditText"
+                    style="@style/sign_in_form_fields"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:autofillHints=""
+                    android:ems="5"
+                    android:hint="@string/pick_a_date"
+                    android:inputType="date" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/heightLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/birthdayLayout">
+
+                <TextView
+                    android:id="@+id/heightTextView"
+                    style="@style/sign_in_form_text"
+                    android:labelFor="@id/heightEditText"
+                    android:text="@string/height" />
+
+                <EditText
+                    android:id="@+id/heightEditText"
+                    style="@style/sign_in_form_fields"
+                    android:autofillHints=""
+                    android:ems="2"
+                    android:inputType="number" />
+
+                <TextView
+                    android:id="@+id/heightUnitTextView"
+                    style="@style/sign_in_form_text"
+                    android:text="@string/cm" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/weightLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/heightLayout">
+
+                <TextView
+                    android:id="@+id/weightTextView"
+                    style="@style/sign_in_form_text"
+                    android:labelFor="@id/weightEditText"
+                    android:text="@string/weight" />
+
+                <EditText
+                    android:id="@+id/weightEditText"
+                    style="@style/sign_in_form_fields"
+                    android:autofillHints=""
+                    android:ems="2"
+                    android:inputType="number" />
+
+                <TextView
+                    android:id="@+id/weightUnitTextView"
+                    style="@style/sign_in_form_text"
+                    android:text="@string/kg" />
+
+            </LinearLayout>
+
+            <RadioGroup
+                android:id="@+id/genderLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:orientation="horizontal"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/weightLayout">
+
+                <RadioButton
+                    android:id="@+id/femaleButton"
+                    style="@style/sign_in_form_radio_buttons"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/radio_states_green"
+                    android:checked="true"
+                    android:text="@string/female" />
+
+                <RadioButton
+                    android:id="@+id/maleButton"
+                    style="@style/sign_in_form_radio_buttons"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/radio_states_green"
+                    android:text="@string/male" />
+
+            </RadioGroup>
+
+            <TextView
+                android:id="@+id/activityFactorTextView"
+                style="@style/sign_in_form_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/choose_activity_factor"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/genderLayout" />
+
+            <RadioGroup
+                android:id="@+id/activityFactorLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/activityFactorTextView">
+
+                <RadioButton
+                    android:id="@+id/activityFactorButton1"
+                    style="@style/sign_in_form_radio_buttons"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginVertical="4dp"
+                    android:background="@drawable/radio_states_green"
+                    android:checked="true"
+                    android:text="@string/activity_factor_1" />
+
+                <RadioButton
+                    android:id="@+id/activityFactorButton2"
+                    style="@style/sign_in_form_radio_buttons"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginVertical="4dp"
+                    android:background="@drawable/radio_states_green"
+                    android:text="@string/activity_factor_2" />
+
+                <RadioButton
+                    android:id="@+id/activityFactorButton3"
+                    style="@style/sign_in_form_radio_buttons"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginVertical="4dp"
+                    android:background="@drawable/radio_states_green"
+                    android:text="@string/activity_factor_3" />
+
+                <RadioButton
+                    android:id="@+id/activityFactorButton4"
+                    style="@style/sign_in_form_radio_buttons"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginVertical="4dp"
+                    android:background="@drawable/radio_states_green"
+                    android:text="@string/activity_factor_4" />
+
+                <RadioButton
+                    android:id="@+id/activityFactorButton5"
+                    style="@style/sign_in_form_radio_buttons"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginVertical="4dp"
+                    android:background="@drawable/radio_states_green"
+                    android:text="@string/activity_factor_5" />
+
+            </RadioGroup>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+    <Button
+        android:id="@+id/signInButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:text="@string/lets_start"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/signInFormScrollView"
+        app:layout_constraintVertical_bias="1.0" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "459950295598",
+    "firebase_url": "https://calorie-calculat-1587505078930.firebaseio.com",
+    "project_id": "calorie-calculat-1587505078930",
+    "storage_bucket": "calorie-calculat-1587505078930.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:459950295598:android:09c8c7ae6bf7a8c101edbf",
+        "android_client_info": {
+          "package_name": "com.meiri.caloriecalculator"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "459950295598-8sdrnce90ke1dmkh9l669ue6phbeng53.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDDgawwOx9CkOM1eLBG3nOOIqulZbVYlDw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "459950295598-8sdrnce90ke1dmkh9l669ue6phbeng53.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

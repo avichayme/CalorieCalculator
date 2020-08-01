@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">Calorie Calculator</string>
+
+    <!-- Activity Names and Descriptions -->
+    <string name="name_sign_in_activity">SignInActivity</string>
+    <string name="sign_out">Sign Out</string>
+    <string name="disconnect">Disconnect</string>
+
+    <!-- Sign In Form -->
+    <string name="birthday">Birthday:</string>
+    <string name="height">Height:</string>
+    <string name="weight">Weight:</string>
+    <string name="cm">cm</string>
+    <string name="kg">Kg</string>
+    <string name="female">Female</string>
+    <string name="male">Male</string>
+    <string name="activity_factor_1">1.2</string>
+    <string name="activity_factor_2">1.375</string>
+    <string name="activity_factor_3">1.55</string>
+    <string name="activity_factor_4">1.725</string>
+    <string name="activity_factor_5">1.9</string>
+    <string name="pick_a_date">Pick a date..</string>
+    <string name="server_client_id">459950295598-13r5lk3c6htsdfcpjr9f0kdtnhgu22c7.apps.googleusercontent.com</string>
+    <string name="lets_start">Let\'s Start!</string>
+    <string name="choose_activity_factor">Choose Activity Factor:</string>
+</resources>
