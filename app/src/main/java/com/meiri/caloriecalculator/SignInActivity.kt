@@ -2,6 +2,7 @@ package com.meiri.caloriecalculator
 
 import android.app.DatePickerDialog
 import android.app.DatePickerDialog.OnDateSetListener
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -16,8 +17,7 @@ import java.util.*
 class SignInActivity : AppCompatActivity(), View.OnClickListener, View.OnFocusChangeListener {
 
     private lateinit var datePickerDialog: DatePickerDialog
-    private var acc = 0 // TODO: remove later
-    private val user = User(acc++)
+    private lateinit var user: User
     private val formatter = DateTimeFormatter.ofPattern("d-M-yyyy")
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,6 +25,7 @@ class SignInActivity : AppCompatActivity(), View.OnClickListener, View.OnFocusCh
         setContentView(R.layout.activity_sign_in)
 
         Log.d(TAG, "[onCreate] initialize activity")
+        user = User(intent.getStringExtra("user_id")!!)
         initializeCalendar()
 //        getUserInfo()
 
@@ -61,7 +62,7 @@ class SignInActivity : AppCompatActivity(), View.OnClickListener, View.OnFocusCh
         // date picker dialog
         datePickerDialog = DatePickerDialog(
             this,
-            OnDateSetListener { _, year, month, day -> // set date in the edit text
+            { _, year, month, day -> // set date in the edit text
                 birthDateEditText.setText("$day/${month + 1}/$year")
             }, mYear, mMonth, mDay
         )

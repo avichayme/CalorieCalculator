@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/blue_grey_700"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/statusTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:gravity="center"
+        android:text=""
+        android:textColor="@android:color/white"
+        android:textSize="36sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="HELP" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/addMealFormScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+
+        app:layout_constraintTop_toBottomOf="@+id/statusTextView"
+        tools:layout_editor_absoluteX="16dp">
+
+        <LinearLayout
+            android:id="@+id/mealDateLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/birthdayTextView"
+                style="@style/form_text"
+                android:text="@string/meal_date" />
+
+            <EditText
+                android:id="@+id/mealDateEditText"
+                style="@style/form_fields"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:autofillHints=""
+                android:ems="5"
+                android:hint="@string/pick_a_date"
+                android:inputType="date" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/mealTimeLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/mealDateLayout">
+
+            <TextView
+                android:id="@+id/mealTimeTextView"
+                style="@style/form_text"
+                android:labelFor="@id/mealTimeEditText"
+                android:text="@string/meal_time" />
+
+            <EditText
+                android:id="@+id/mealTimeEditText"
+                style="@style/form_fields"
+                android:autofillHints=""
+                android:ems="3"
+                android:inputType="time" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/searchFoodLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/mealTimeLayout"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/searchFoodEditText"
+                style="@style/form_fields"
+                android:autofillHints=""
+                android:ems="3"
+                android:inputType="text" />
+
+            <Button
+                android:id="@+id/searchFoodButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:labelFor="@id/searchFoodEditText"
+                android:text="@string/search_food" />
+
+        </LinearLayout>
+
+        <ListView
+            android:id="@+id/foodItemsListView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/searchFoodLayout" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <Button
+        android:id="@+id/addMealButton"
+        style="@style/form_buttons"
+        android:drawableStart="@android:drawable/ic_menu_add"
+        android:text="@string/add_meal"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

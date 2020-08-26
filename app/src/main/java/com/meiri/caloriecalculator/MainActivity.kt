@@ -43,16 +43,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         // Build a GoogleSignInClient with the options specified by gso.
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso)
         findViewById<SignInButton>(R.id.signInButton).setOnClickListener(this)
-//        checkAPI() //TODO: remove later
-//        startActivity(Intent(this, SignInActivity::class.java)) //TODO: remove later
-    }
-
-    private fun checkAPI() {
-        val queue = Volley.newRequestQueue(this)
-        val url = "https://api.edamam.com/api/food-database/parser?app_id=ee616153&app_key=3e7f028bf5ca40859bc13b967bee5a69&ingr=cheesecake"
-
-        val stringRequest = StringRequest(Request.Method.GET, url, Response.Listener { response -> Log.d(TAG, "got response: $response") }, Response.ErrorListener { error ->  Log.d(TAG, "got error: ${error.message}") })
-        queue.add(stringRequest)
+        startActivity(Intent(this, MealActivity::class.java))
     }
 
     override fun onStart() {
@@ -106,7 +97,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         try {
             val account = completedTask.getResult(ApiException::class.java)!!
             // Signed in successfully, show authenticated UI.
-//            startActivity(Intent(this, SignInActivity::class.java)) TODO: add conditional startActivity
             firebaseAuthWithGoogle(account.idToken!!)
         } catch (e: ApiException) {
             // The ApiException status code indicates the detailed failure reason.
@@ -125,14 +115,26 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                     // Sign in success, update UI with the signed-in user's information
                     Log.d(TAG, "[firebaseAuthWithGoogle] signInWithCredential:success")
                     val firebaseUser = mFirebaseAuth.currentUser
+                    if (task.result?.additionalUserInfo?.isNewUser!!)
+                        createNewUser(firebaseUser?.uid)
                     updateUI(firebaseUser)
                 } else {
                     // If sign in fails, display a message to the user.
-                    Log.w(TAG, "[firebaseAuthWithGoogle] signInWithCredential:failure", task.exception)
+                    Log.w(
+                        TAG,
+                        "[firebaseAuthWithGoogle] signInWithCredential:failure",
+                        task.exception
+                    )
                     Toast.makeText(this, "Authentication Failed.", Toast.LENGTH_SHORT).show()
                     updateUI(null)
                 }
             }
+    }
+
+    private fun createNewUser(uid: String?) {
+        val intent = Intent(this, SignInActivity::class.java)
+        intent.putExtra("user_id", uid)
+        startActivity(intent)
     }
 
     companion object {

@@ -44,12 +44,12 @@
 
                 <TextView
                     android:id="@+id/birthdayTextView"
-                    style="@style/sign_in_form_text"
+                    style="@style/form_text"
                     android:text="@string/birthday" />
 
                 <EditText
                     android:id="@+id/birthDateEditText"
-                    style="@style/sign_in_form_fields"
+                    style="@style/form_fields"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:autofillHints=""
@@ -69,20 +69,20 @@
 
                 <TextView
                     android:id="@+id/heightTextView"
-                    style="@style/sign_in_form_text"
+                    style="@style/form_text"
                     android:labelFor="@id/heightEditText"
                     android:text="@string/height" />
 
                 <EditText
                     android:id="@+id/heightEditText"
-                    style="@style/sign_in_form_fields"
+                    style="@style/form_fields"
                     android:autofillHints=""
                     android:ems="2"
                     android:inputType="number" />
 
                 <TextView
                     android:id="@+id/heightUnitTextView"
-                    style="@style/sign_in_form_text"
+                    style="@style/form_text"
                     android:text="@string/cm" />
 
             </LinearLayout>
@@ -97,20 +97,20 @@
 
                 <TextView
                     android:id="@+id/weightTextView"
-                    style="@style/sign_in_form_text"
+                    style="@style/form_text"
                     android:labelFor="@id/weightEditText"
                     android:text="@string/weight" />
 
                 <EditText
                     android:id="@+id/weightEditText"
-                    style="@style/sign_in_form_fields"
+                    style="@style/form_fields"
                     android:autofillHints=""
                     android:ems="2"
                     android:inputType="number" />
 
                 <TextView
                     android:id="@+id/weightUnitTextView"
-                    style="@style/sign_in_form_text"
+                    style="@style/form_text"
                     android:text="@string/kg" />
 
             </LinearLayout>
@@ -126,7 +126,7 @@
 
                 <RadioButton
                     android:id="@+id/femaleButton"
-                    style="@style/sign_in_form_radio_buttons"
+                    style="@style/form_radio_buttons"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:background="@drawable/radio_states_green"
@@ -135,7 +135,7 @@
 
                 <RadioButton
                     android:id="@+id/maleButton"
-                    style="@style/sign_in_form_radio_buttons"
+                    style="@style/form_radio_buttons"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:background="@drawable/radio_states_green"
@@ -145,7 +145,7 @@
 
             <TextView
                 android:id="@+id/activityFactorTextView"
-                style="@style/sign_in_form_text"
+                style="@style/form_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
@@ -166,7 +166,7 @@
 
                 <RadioButton
                     android:id="@+id/activityFactorButton1"
-                    style="@style/sign_in_form_radio_buttons"
+                    style="@style/form_radio_buttons"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_marginVertical="4dp"
@@ -176,7 +176,7 @@
 
                 <RadioButton
                     android:id="@+id/activityFactorButton2"
-                    style="@style/sign_in_form_radio_buttons"
+                    style="@style/form_radio_buttons"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_marginVertical="4dp"
@@ -185,7 +185,7 @@
 
                 <RadioButton
                     android:id="@+id/activityFactorButton3"
-                    style="@style/sign_in_form_radio_buttons"
+                    style="@style/form_radio_buttons"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_marginVertical="4dp"
@@ -194,7 +194,7 @@
 
                 <RadioButton
                     android:id="@+id/activityFactorButton4"
-                    style="@style/sign_in_form_radio_buttons"
+                    style="@style/form_radio_buttons"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_marginVertical="4dp"
@@ -203,7 +203,7 @@
 
                 <RadioButton
                     android:id="@+id/activityFactorButton5"
-                    style="@style/sign_in_form_radio_buttons"
+                    style="@style/form_radio_buttons"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_marginVertical="4dp"
@@ -218,20 +218,13 @@
 
     <Button
         android:id="@+id/signInButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
         android:text="@string/lets_start"
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/signInFormScrollView"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="1.0"
+        style="@style/form_buttons" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

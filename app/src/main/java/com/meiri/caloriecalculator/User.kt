@@ -14,20 +14,14 @@ import kotlin.collections.HashMap
 import kotlin.math.roundToInt
 
 
-class User {
-    val userId: Int
+class User(val userId: String) {
     var birthDate: LocalDate = INIT_BIRTH_DATE // figure out a way to save as Date
     var height: Int = INIT_HEIGHT
     var weight: Int = INIT_WEIGHT
     var gender: String = INIT_GENDER
     var activityFactor: Double = INIT_ACTIVITY_FACTOR
 
-    constructor(userId: Int) {
-        this.userId = userId
-        updateUserFromDatabase()
-    }
-
-    val age: Int
+    private val age: Int
         get() {
             val dob = Calendar.getInstance()
             val today = Calendar.getInstance()
@@ -38,12 +32,8 @@ class User {
                 age--
             return age
         }
-
-    val bmr: Double
-        get() = if (gender == Resources.getSystem()
-                .getString(R.string.male)
-        ) 13.397 * weight + 4.799 * height - 5.677 * age + 88.362
-        else 9.247 * weight + 3.098 * height - 4.330 * age + 447.593
+    private val bmr: Double
+        get() = if (gender == Resources.getSystem().getString(R.string.male)) 13.397 * weight + 4.799 * height - 5.677 * age + 88.362 else 9.247 * weight + 3.098 * height - 4.330 * age + 447.593
     val calories: Double
         get() = (bmr * activityFactor).roundToInt() / 100.0
 
@@ -54,9 +44,9 @@ class User {
         val listener = object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 val ti = object : GenericTypeIndicator<HashMap<String, Any>?>() {}
-                val userData: HashMap<String, Any>? = dataSnapshot.child(userId.toString()).getValue(ti)
+                val userData: HashMap<String, Any>? = dataSnapshot.child(userId).getValue(ti)
 
-                if (userData?.containsKey(userId.toString())!!) {
+                if (userData != null) {
                     birthDate = LocalDate.parse(userData["birth_date"].toString(), formatter)
                     height = userData["height"] as Int
                     weight = userData["weight"] as Int
@@ -73,7 +63,7 @@ class User {
     }
 
     fun saveToDatabase() {
-        usersRef.child(userId.toString()).setValue(toDatabaseRecord())
+        usersRef.child(userId).setValue(toDatabaseRecord())
     }
 
     private fun toDatabaseRecord(): MutableMap<String, Any> {
@@ -90,7 +80,12 @@ class User {
         private val INIT_BIRTH_DATE = LocalDate.now()
         private const val INIT_HEIGHT = 170
         private const val INIT_WEIGHT = 80
-        private val INIT_GENDER = Resources.getSystem().getString(R.string.female)
-        private val INIT_ACTIVITY_FACTOR = Resources.getSystem().getString(R.string.activity_factor_1).toDouble()
+        private const val INIT_GENDER = "Female" // Resources.getSystem().getString(R.string.female)
+        private const val INIT_ACTIVITY_FACTOR =
+            1.2 // Resources.getSystem().getString(R.string.activity_factor_1).toDouble()
+    }
+
+    init {
+        updateUserFromDatabase()
     }
 }

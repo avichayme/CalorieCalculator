@@ -1,8 +1,10 @@
 <resources>
     <string name="app_name">Calorie Calculator</string>
+    <string name="server_client_id">459950295598-13r5lk3c6htsdfcpjr9f0kdtnhgu22c7.apps.googleusercontent.com</string>
 
     <!-- Activity Names and Descriptions -->
     <string name="name_sign_in_activity">SignInActivity</string>
+    <string name="name_meal_activity">MealActivity</string>
     <string name="sign_out">Sign Out</string>
     <string name="disconnect">Disconnect</string>
 
@@ -20,7 +22,23 @@
     <string name="activity_factor_4">1.725</string>
     <string name="activity_factor_5">1.9</string>
     <string name="pick_a_date">Pick a date..</string>
-    <string name="server_client_id">459950295598-13r5lk3c6htsdfcpjr9f0kdtnhgu22c7.apps.googleusercontent.com</string>
     <string name="lets_start">Let\'s Start!</string>
     <string name="choose_activity_factor">Choose Activity Factor:</string>
+
+    <!-- Meals Menu -->
+    <string name="add_meal">Add Meal</string>
+    <string name="meals_title">Meals</string>
+    <string name="meal_date">Date:</string>
+    <string name="meal_time">Time:</string>
+    <string name="compose_your_meal">Compose Your Meal</string>
+    <string name="meal_item_search_button_description">for searching food item to compose the meal</string>
+    <string name="search_meal_item_hint">search for …</string>
+    <string name="search_meal_item_button_description">search meal item</string>
+    <string name="food_thumbnail">food thumbnail</string>
+
+    <!-- Searchable Activity -->
+    <string name="activity_label">Search Feature</string>
+    <string name="search_hint">Search Food</string>
+    <string name="search_view">Enter search</string>
+    <string name="search_food">Search Food</string>
 </resources>
