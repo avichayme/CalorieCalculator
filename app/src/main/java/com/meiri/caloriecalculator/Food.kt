@@ -11,7 +11,7 @@ class Food(var foodName: String, var calories: Double, var imgURL: String) {
     }
 
     companion object {
-        fun getRecipesFromRequest(jsonString: String, context: Context): ArrayList<Food> {
+        fun getRecipesFromRequest(jsonString: String): ArrayList<Food> {
             val foodList = ArrayList<Food>()
 
             try {

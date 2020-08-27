@@ -4,31 +4,35 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.android.volley.Request
-import com.android.volley.Response
-import com.android.volley.toolbox.StringRequest
-import com.android.volley.toolbox.Volley
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
-import com.google.android.gms.common.SignInButton
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
+import kotlinx.android.synthetic.main.activity_main.*
+
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var mGoogleSignInClient: GoogleSignInClient
     private lateinit var mFirebaseAuth: FirebaseAuth
+    private lateinit var adapter: TabAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        adapter = TabAdapter(supportFragmentManager)
+        adapter.addFragment(Tab1Fragment(), "Tab 1")
+        adapter.addFragment(MealFragment(), "Tab 2")
+        adapter.addFragment(Tab3Fragment(), "Tab 3")
+
+        viewPager.adapter = adapter
+        tabLayout.setupWithViewPager(viewPager)
 
         // Initialize Firebase Auth
         mFirebaseAuth = FirebaseAuth.getInstance()
@@ -42,8 +46,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
         // Build a GoogleSignInClient with the options specified by gso.
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso)
-        findViewById<SignInButton>(R.id.signInButton).setOnClickListener(this)
-        startActivity(Intent(this, MealActivity::class.java))
+//        findViewById<SignInButton>(R.id.signInButton).setOnClickListener(this)
+//        startActivity(Intent(this, MealActivity::class.java))
     }
 
     override fun onStart() {
@@ -51,21 +55,21 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
         // Check if user is signed in (non-null) and update UI accordingly.
         val firebaseUser = mFirebaseAuth.currentUser
-        updateUI(firebaseUser)
+//        updateUI(firebaseUser)
     }
 
-    private fun updateUI(user: FirebaseUser?) {
-        Log.i(TAG, "[updateUI] ${user.toString()}")
-        if (user != null) {
-            findViewById<TextView>(R.id.statusTextView).text = "Hello ${user.displayName}!"
-//            findViewById<SignInButton>(R.id.sign_in_button).isEnabled = false
-            findViewById<SignInButton>(R.id.signInButton).visibility = View.GONE
-        } else {
-            findViewById<TextView>(R.id.statusTextView).text = "Hello World!"
-//            findViewById<SignInButton>(R.id.sign_in_button).isEnabled = true
-            findViewById<SignInButton>(R.id.signInButton).visibility = View.VISIBLE
-        }
-    }
+//    private fun updateUI(user: FirebaseUser?) {
+//        Log.i(TAG, "[updateUI] ${user.toString()}")
+//        if (user != null) {
+//            findViewById<TextView>(R.id.statusTextView).text = "Hello ${user.displayName}!"
+////            findViewById<SignInButton>(R.id.sign_in_button).isEnabled = false
+//            findViewById<SignInButton>(R.id.signInButton).visibility = View.GONE
+//        } else {
+//            findViewById<TextView>(R.id.statusTextView).text = "Hello World!"
+////            findViewById<SignInButton>(R.id.sign_in_button).isEnabled = true
+//            findViewById<SignInButton>(R.id.signInButton).visibility = View.VISIBLE
+//        }
+//    }
 
     override fun onClick(v: View?) {
         Log.i(TAG, "[onClick] ${v.toString()}")
@@ -102,7 +106,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             // The ApiException status code indicates the detailed failure reason.
             // Please refer to the GoogleSignInStatusCodes class reference for more information.
             Log.w(TAG, "[handleSignInResult] signInResult:failed code=" + e.statusCode)
-            updateUI(null)
+//            updateUI(null)
         }
     }
 
@@ -117,7 +121,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                     val firebaseUser = mFirebaseAuth.currentUser
                     if (task.result?.additionalUserInfo?.isNewUser!!)
                         createNewUser(firebaseUser?.uid)
-                    updateUI(firebaseUser)
+//                    updateUI(firebaseUser)
                 } else {
                     // If sign in fails, display a message to the user.
                     Log.w(
@@ -126,7 +130,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                         task.exception
                     )
                     Toast.makeText(this, "Authentication Failed.", Toast.LENGTH_SHORT).show()
-                    updateUI(null)
+//                    updateUI(null)
                 }
             }
     }

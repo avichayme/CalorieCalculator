@@ -2,30 +2,43 @@ package com.meiri.caloriecalculator
 
 import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
-import androidx.appcompat.app.AppCompatActivity
+import android.view.ViewGroup
+import android.widget.Button
+import android.widget.EditText
+import android.widget.ListView
+import androidx.fragment.app.Fragment
 import com.android.volley.Request
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
-import kotlinx.android.synthetic.main.activity_meal.*
 
-class MealActivity : AppCompatActivity(), View.OnClickListener {
+class MealFragment : Fragment(), View.OnClickListener {
     private val foodList = ArrayList<Food>()
+    private lateinit var searchFoodButton: Button
+    private lateinit var addMealButton: Button
+    private lateinit var searchFoodEditText: EditText
+    private lateinit var foodItemsListView: ListView
 
-    override fun onCreate(savedInstanceState: Bundle?) {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_meal)
-
+        val inputFragmentView = inflater.inflate(R.layout.fragment_meal, container, false)
         Log.d(TAG, "[onCreate] initialize activity")
+
+        searchFoodButton = inputFragmentView.findViewById(R.id.search_food_button)
+        addMealButton = inputFragmentView.findViewById(R.id.add_meal_button)
+        searchFoodEditText = inputFragmentView.findViewById(R.id.search_food_edit_text)
+        foodItemsListView = inputFragmentView.findViewById(R.id.food_items_list_view)
 
         searchFoodButton.setOnClickListener(this)
         addMealButton.setOnClickListener(this)
+        return inputFragmentView
     }
 
     private fun searchFood() {
         val ingredient = searchFoodEditText.text.toString()
-        val queue = Volley.newRequestQueue(this)
-        val url = "https://api.edamam.com/api/food-database/parser?app_id=$APP_ID&app_key=$APP_KEY&category=generic-foods&ingr=$ingredient"
+        val queue = Volley.newRequestQueue(activity)
+        val url = "https://api.edamam.com/api/food-database/parser?app_id=${APP_ID}&app_key=${APP_KEY}&category=generic-foods&ingr=$ingredient"
 
         val stringRequest = StringRequest(
             Request.Method.GET,
@@ -39,7 +52,6 @@ class MealActivity : AppCompatActivity(), View.OnClickListener {
         when (v) {
             searchFoodButton -> searchFood()
             addMealButton -> addMeallToDB()
-//            composeMealButton -> tmpFunc()
         }
     }
 
@@ -49,8 +61,8 @@ class MealActivity : AppCompatActivity(), View.OnClickListener {
 
     private fun tmpFunc(response: String) {
         Log.d(TAG, "got error: $response")
-        val foodList = Food.getRecipesFromRequest(response, this)
-        val adapter = FoodAdapter(this, foodList)
+        val foodList = Food.getRecipesFromRequest(response)
+        val adapter = activity?.applicationContext?.let { FoodAdapter(it, foodList) }
         foodItemsListView.adapter = adapter
     }
 

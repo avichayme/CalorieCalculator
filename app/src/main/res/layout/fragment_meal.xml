@@ -89,23 +89,23 @@
             android:orientation="horizontal">
 
             <EditText
-                android:id="@+id/searchFoodEditText"
+                android:id="@+id/search_food_edit_text"
                 style="@style/form_fields"
                 android:autofillHints=""
                 android:ems="3"
                 android:inputType="text" />
 
             <Button
-                android:id="@+id/searchFoodButton"
+                android:id="@+id/search_food_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:labelFor="@id/searchFoodEditText"
+                android:labelFor="@id/search_food_edit_text"
                 android:text="@string/search_food" />
 
         </LinearLayout>
 
         <ListView
-            android:id="@+id/foodItemsListView"
+            android:id="@+id/food_items_list_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
@@ -114,7 +114,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <Button
-        android:id="@+id/addMealButton"
+        android:id="@+id/add_meal_button"
         style="@style/form_buttons"
         android:drawableStart="@android:drawable/ic_menu_add"
         android:text="@string/add_meal"
