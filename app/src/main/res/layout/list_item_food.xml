@@ -15,14 +15,14 @@
         android:layout_marginBottom="6dp"
         android:contentDescription="@string/food_thumbnail"
         android:scaleType="centerInside"
-        tools:src="@mipmap/ic_launcher" />
+        tools:src="@drawable/app_icon_bw" />
 
     <RelativeLayout
         android:id="@+id/recipe_list_text_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
         android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
         android:layout_toEndOf="@id/food_item_thumbnail">
 
         <TextView
@@ -48,4 +48,5 @@
             tools:text="Subtitle" />
 
     </RelativeLayout>
+
 </RelativeLayout>

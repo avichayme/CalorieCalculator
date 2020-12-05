@@ -7,7 +7,7 @@
     android:background="@color/blue_grey_700"
     tools:context=".MainActivity">
 
-    <TextView
+        <TextView
         android:id="@+id/statusTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -45,7 +45,7 @@
                 android:text="@string/meal_date" />
 
             <EditText
-                android:id="@+id/mealDateEditText"
+                android:id="@+id/meal_date_edit_text"
                 style="@style/form_fields"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -67,11 +67,11 @@
             <TextView
                 android:id="@+id/mealTimeTextView"
                 style="@style/form_text"
-                android:labelFor="@id/mealTimeEditText"
+                android:labelFor="@id/meal_time_edit_Text"
                 android:text="@string/meal_time" />
 
             <EditText
-                android:id="@+id/mealTimeEditText"
+                android:id="@+id/meal_time_edit_Text"
                 style="@style/form_fields"
                 android:autofillHints=""
                 android:ems="3"
@@ -79,37 +79,19 @@
 
         </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/searchFoodLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/mealTimeLayout"
-            android:orientation="horizontal">
-
-            <EditText
-                android:id="@+id/search_food_edit_text"
-                style="@style/form_fields"
-                android:autofillHints=""
-                android:ems="3"
-                android:inputType="text" />
-
-            <Button
-                android:id="@+id/search_food_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:labelFor="@id/search_food_edit_text"
-                android:text="@string/search_food" />
-
-        </LinearLayout>
-
         <ListView
-            android:id="@+id/food_items_list_view"
+            android:id="@+id/selected_food_items_list_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/searchFoodLayout" />
+            app:layout_constraintTop_toBottomOf="@id/test_button" />
+
+        <Button
+            android:id="@+id/test_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/mealTimeLayout"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

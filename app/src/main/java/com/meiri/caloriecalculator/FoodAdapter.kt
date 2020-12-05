@@ -9,14 +9,15 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.squareup.picasso.Picasso
 
-class FoodAdapter(private val context: Context, private val dataSource: ArrayList<Food>) : BaseAdapter() {
+class FoodAdapter(context: Context, private val dataSource: ArrayList<Food>) : BaseAdapter() {
     private val inflater: LayoutInflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
-        val rowView = inflater.inflate(R.layout.list_item_food, parent, false)
+        var rowView = convertView
+        if (rowView == null) rowView = inflater.inflate(R.layout.list_item_food, parent, false)
 
         // Get food item elements
-        val nameTextView = rowView.findViewById(R.id.food_item_name) as TextView
+        val nameTextView = rowView?.findViewById(R.id.food_item_name) as TextView
         val calorieTextView = rowView.findViewById(R.id.food_item_calorie) as TextView
         val thumbnailImageView = rowView.findViewById(R.id.food_item_thumbnail) as ImageView
 

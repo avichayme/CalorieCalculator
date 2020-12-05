@@ -1,13 +1,22 @@
 package com.meiri.caloriecalculator
 
-import android.content.Context
 import org.json.JSONException
 import org.json.JSONObject
 import kotlin.math.roundToInt
 
-class Food(var foodName: String, var calories: Double, var imgURL: String) {
+class Food(var foodId: String, var foodName: String, var calories: Double, var imgURL: String) {
     init {
         calories = (calories * 100).roundToInt() / 100.0
+    }
+
+    override fun equals(other: Any?): Boolean {
+        if (other !is Food)
+            return false
+        return other.foodId == foodId
+    }
+
+    override fun hashCode(): Int {
+        return foodId.hashCode()
     }
 
     companion object {
@@ -22,12 +31,15 @@ class Food(var foodName: String, var calories: Double, var imgURL: String) {
                 // Get Food objects from data
                 (0 until hints.length()).mapTo(foodList) {
                     val foodItem = hints.getJSONObject(it).getJSONObject("food")
+                    val foodId = foodItem.getString("foodId")
                     val name = foodItem.getString("label")
                     val calories = foodItem.getJSONObject("nutrients").getDouble("ENERC_KCAL")
-                    val image = foodItem.optString("image", "drawable://"+R.drawable.app_icon_bw)
-                    Food(name, calories, image)
+                    val image = foodItem.optString("image", "drawable://" + R.drawable.app_icon_bw)
+                    Food(foodId, name, calories, image)
                 }
-            } catch (e: JSONException) { e.printStackTrace() }
+            } catch (e: JSONException) {
+                e.printStackTrace()
+            }
 
             return foodList
         }
