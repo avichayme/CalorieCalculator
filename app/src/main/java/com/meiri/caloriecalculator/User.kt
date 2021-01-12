@@ -13,7 +13,6 @@ import java.util.*
 import kotlin.collections.HashMap
 import kotlin.math.roundToInt
 
-
 class User(val userId: String) {
     var birthDate: LocalDate = INIT_BIRTH_DATE // figure out a way to save as Date
     var height: Int = INIT_HEIGHT

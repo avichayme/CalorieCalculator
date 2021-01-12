@@ -4,21 +4,28 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.viewpager.widget.ViewPager
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.common.SignInButton
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
+import com.google.android.material.tabs.TabLayout
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
-import kotlinx.android.synthetic.main.activity_main.*
 
 enum class State {LOGGED_OFF, SIGN_UP, FULL_REGISTERED}
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
+    private lateinit var signInButton: SignInButton
+    private lateinit var welcomeTextView: TextView
+    private lateinit var viewPager: ViewPager
+    private lateinit var tabLayout: TabLayout
     private lateinit var mGoogleSignInClient: GoogleSignInClient
     private lateinit var adapter: TabAdapter
     private var state: State = State.LOGGED_OFF
@@ -26,6 +33,12 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        Log.i(TAG, "[onCreate]")
+
+        signInButton = findViewById(R.id.sign_in_button)
+        welcomeTextView = findViewById(R.id.welcome_text_view)
+        viewPager = findViewById(R.id.main_view_pager)
+        tabLayout = findViewById(R.id.main_tab_layout)
 
         Log.d(TAG, "[onCreate] Starting Activity. State is ${state.name}")
         updateState()
@@ -34,7 +47,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     override fun onClick(v: View?) {
         Log.i(TAG, "[onClick] ${v.toString()}")
         when (v!!.id) {
-            R.id.signInButton -> {
+            R.id.sign_in_button -> {
                 state = State.SIGN_UP
                 Log.d(TAG, "[onClick] Changing state to ${state.name}")
             }
@@ -43,6 +56,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun updateState() {
+        Log.i(TAG, "[updateState]")
         when (state) {
             State.LOGGED_OFF -> initializeActivity()
             State.SIGN_UP -> signIn()
@@ -82,6 +96,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        Log.d(TAG, "[onActivityResult]")
         super.onActivityResult(requestCode, resultCode, data)
 
         // Result returned from launching the Intent from GoogleSignInClient.getSignInIntent(...);
@@ -96,9 +111,9 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     private fun handleSignInResult(completedTask: Task<GoogleSignInAccount>) {
         Log.i(TAG, "[handleSignInResult] $completedTask")
         try {
-            val account = completedTask.getResult(ApiException::class.java)!!
+            val account = completedTask.getResult(ApiException::class.java)
             // Signed in successfully, show authenticated UI.
-            firebaseAuthWithGoogle(account.idToken!!)
+            firebaseAuthWithGoogle(account?.idToken!!)
             state = State.FULL_REGISTERED
             Log.d(TAG, "[handleSignInResult] Changing state to ${state.name}")
             updateState()
@@ -133,13 +148,15 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun createNewUser(uid: String?) {
+        Log.i(TAG, "[createNewUser] creating new user with id $uid")
         val intent = Intent(this, SignInActivity::class.java)
         intent.putExtra("user_id", uid)
         startActivity(intent)
     }
 
     private fun startMainActivity() {
-        statusTextView.visibility = View.GONE
+        Log.i(TAG, "[startMainActivity]")
+        welcomeTextView.visibility = View.GONE
         signInButton.visibility = View.GONE
         adapter = TabAdapter(supportFragmentManager)
         adapter.addFragment(Tab1Fragment(), "Tab 1")

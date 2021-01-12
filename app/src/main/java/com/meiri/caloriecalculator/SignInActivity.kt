@@ -1,22 +1,23 @@
 package com.meiri.caloriecalculator
 
-import android.app.DatePickerDialog
-import android.app.DatePickerDialog.OnDateSetListener
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Button
+import android.widget.EditText
 import android.widget.RadioButton
+import android.widget.RadioGroup
 import androidx.appcompat.app.AppCompatActivity
-import kotlinx.android.synthetic.main.activity_sign_in.*
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
-import java.util.*
 
 
-class SignInActivity : AppCompatActivity(), View.OnClickListener, View.OnFocusChangeListener {
+class SignInActivity : AppCompatActivity(), View.OnClickListener {
 
-    private lateinit var datePickerDialog: DatePickerDialog
+    private lateinit var birthDateEditText: EditText
+    private lateinit var registerButton: Button
+    private lateinit var  genderLayout: RadioGroup
+    private lateinit var  activityFactorLayout: RadioGroup
     private lateinit var user: User
     private val formatter = DateTimeFormatter.ofPattern("d-M-yyyy")
 
@@ -26,12 +27,15 @@ class SignInActivity : AppCompatActivity(), View.OnClickListener, View.OnFocusCh
 
         Log.d(TAG, "[onCreate] initialize activity")
         user = User(intent.getStringExtra("user_id")!!)
-        initializeCalendar()
 //        getUserInfo()
 
-        birthDateEditText.onFocusChangeListener = this
-        birthDateEditText.setOnClickListener(this)
-        signInButton.setOnClickListener(this)
+        birthDateEditText = findViewById(R.id.birthDateEditText)
+        registerButton = findViewById(R.id.registerButton)
+        genderLayout = findViewById(R.id.genderLayout)
+        activityFactorLayout = findViewById(R.id.activityFactorLayout)
+
+        birthDateEditText.addTextChangedListener(DateTextWatcher())
+        registerButton.setOnClickListener(this)
     }
 
     private fun getUserInfo() {
@@ -41,48 +45,15 @@ class SignInActivity : AppCompatActivity(), View.OnClickListener, View.OnFocusCh
 
     override fun onClick(v: View?) {
         when (v) {
-            birthDateEditText -> pickADate()
-            signInButton -> setUserInfo()
+            registerButton -> setUserInfo()
         }
-    }
-
-    override fun onFocusChange(v: View?, hasFocus: Boolean) {
-        when (v) {
-            birthDateEditText -> if (hasFocus) pickADate()
-        }
-    }
-
-    private fun initializeCalendar() {
-        // calender class's instance and get current date , month and year from calender
-        val c = Calendar.getInstance()
-        val mYear = c[Calendar.YEAR] // current year
-        val mMonth = c[Calendar.MONTH] // current month
-        val mDay = c[Calendar.DAY_OF_MONTH] // current day
-
-        // date picker dialog
-        datePickerDialog = DatePickerDialog(
-            this,
-            { _, year, month, day -> // set date in the edit text
-                birthDateEditText.setText("$day/${month + 1}/$year")
-            }, mYear, mMonth, mDay
-        )
-
-        Log.d(TAG, "[initializeCalendar] TEST - mYear = $mYear, mMonth = $mMonth mDay = $mDay")
-        datePickerDialog.datePicker.maxDate = c.timeInMillis
-        c.set(1970, 1, 1)
-        Log.d(TAG, "[initializeCalendar] TEST - mYear = $mYear, mMonth = $mMonth mDay = $mDay")
-        datePickerDialog.datePicker.minDate = c.timeInMillis
-    }
-
-    private fun pickADate() {
-        datePickerDialog.show()
     }
 
     private fun setUserInfo() {
         user.birthDate =
             LocalDate.parse(birthDateEditText.text.toString().replace("/", "-"), formatter)
-        user.height = heightEditText.text.toString().toInt()
-        user.weight = weightEditText.text.toString().toInt()
+        user.height = findViewById<EditText>(R.id.heightEditText).text.toString().toInt()
+        user.weight = findViewById<EditText>(R.id.weightEditText).text.toString().toInt()
         user.gender = findViewById<RadioButton>(genderLayout.checkedRadioButtonId).text.toString()
         user.activityFactor =
             findViewById<RadioButton>(activityFactorLayout.checkedRadioButtonId).text.toString()
@@ -90,6 +61,7 @@ class SignInActivity : AppCompatActivity(), View.OnClickListener, View.OnFocusCh
 
         Log.d(TAG, "[setUserInfo] User info was updated:\n$user")
         user.saveToDatabase()
+        finish()
     }
 
     companion object {

@@ -53,8 +53,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:autofillHints=""
-                    android:ems="5"
-                    android:hint="@string/pick_a_date"
+                    android:hint="@string/date_format"
                     android:inputType="date" />
 
             </LinearLayout>
@@ -217,7 +216,7 @@
     </ScrollView>
 
     <Button
-        android:id="@+id/signInButton"
+        android:id="@+id/registerButton"
         android:text="@string/lets_start"
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"

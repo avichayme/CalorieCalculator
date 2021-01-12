@@ -16,8 +16,6 @@ import com.google.firebase.ktx.Firebase
 
 class MealFragment : Fragment(), View.OnClickListener {
     private val foodList = ArrayList<Food>()
-    private lateinit var innerFoodList: ArrayList<Food>
-    private val foodList2 = mutableSetOf<Food>()
     private lateinit var mealDateEditText: EditText
     private lateinit var mealTimeEditText: EditText
     private lateinit var addMealButton: Button
@@ -42,6 +40,7 @@ class MealFragment : Fragment(), View.OnClickListener {
 
         addMealButton.setOnClickListener(this)
         testButton.setOnClickListener(this)
+        mealDateEditText.addTextChangedListener(DateTextWatcher())
         return inputFragmentView
     }
 
@@ -49,7 +48,7 @@ class MealFragment : Fragment(), View.OnClickListener {
         when (v) {
             addMealButton -> addMealToDB()
             testButton -> {
-                val cdd = SearchFoodDialog(activity!!, View.SYSTEM_UI_FLAG_FULLSCREEN)
+                val cdd = SearchFoodDialog(activity!!, android.R.style.Theme_NoTitleBar_Fullscreen)
                 cdd.show()
 
                 val foodItemsListView: ListView = cdd.findViewById(R.id.food_items_list_view)
@@ -57,8 +56,6 @@ class MealFragment : Fragment(), View.OnClickListener {
                     OnItemClickListener { _, _, position, _ ->
                         Toast.makeText(activity!!.applicationContext, "Click ListItem Number $position", Toast.LENGTH_LONG).show()
                         foodItemChangeMode(foodItemsListView.adapter.getItem(position) as Food)
-//                        foodList.add(foodItemsListView.adapter.getItem(position) as Food)
-//                        foodList2.add(foodItemsListView.adapter.getItem(position) as Food)
                     }
 
                 cdd.setOnCancelListener {
@@ -80,17 +77,14 @@ class MealFragment : Fragment(), View.OnClickListener {
     }
 
     private fun addMealToDB() {
-//        val userID = MainActivity.getUserID()
-//        val userMealDiary = mealDiary.child(userID!!).child(getLogTime())
-//        for (foodItem in foodList) {
-//            userMealDiary.setValue(foodItem)
-//            userMealDiary.push()
-//        }
-//        TODO("Not yet implemented")
+        val userID = MainActivity.getUserID()
+        val userMealDiary = mealDiary.child(userID!!).child(getLogTime())
+        userMealDiary.setValue(foodList)
+        mealDiary.push()
     }
 
     private fun getLogTime(): String {
-        return "${mealDateEditText.editableText}_{${mealTimeEditText.editableText}"
+        return "${mealDateEditText.editableText}_${mealTimeEditText.editableText}"
     }
 
     object TAG {
