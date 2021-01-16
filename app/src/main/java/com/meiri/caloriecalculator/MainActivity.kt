@@ -159,7 +159,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         welcomeTextView.visibility = View.GONE
         signInButton.visibility = View.GONE
         adapter = TabAdapter(supportFragmentManager)
-        adapter.addFragment(Tab1Fragment(), "Tab 1")
+        adapter.addFragment(DailyLogFragment(), "Tab 1")
         adapter.addFragment(MealFragment(), "Tab 2")
         adapter.addFragment(Tab3Fragment(), "Tab 3")
 

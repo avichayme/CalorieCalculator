@@ -1,12 +1,110 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/blue_grey_700"
+    tools:context=".MainActivity">
+
     <TextView
+        android:id="@+id/daily_progress_text_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:gravity="center"
+        android:text=""
+        android:textColor="@android:color/white"
+        android:textSize="36sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="" />
+
+    <LinearLayout
+        android:id="@+id/date_range_picker_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@+id/daily_progress_text_view">
+
+        <ImageView
+            android:id="@+id/prev_week_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="5"
+            android:contentDescription="@string/prev_week_desc"
+            android:src="@drawable/navigate_back" />
+
+        <TextView
+            android:id="@+id/date_range_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="90"
+            android:textSize="24sp"
+            tools:text="10/01/2021 - 16/01/2021" />
+
+        <ImageView
+            android:id="@+id/next_week_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="5"
+            android:contentDescription="@string/next_week_desc"
+            android:src="@drawable/navigate_next" />
+
+    </LinearLayout>
+
+    <RadioGroup
+        android:id="@+id/day_of_week_picker"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:text="Tab 1"
-        android:textSize="36sp" />
+        android:layout_weight="90"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/date_range_picker_layout">
 
-</RelativeLayout>
+        <RadioButton
+            android:id="@+id/sunday_button"
+            style="@style/day_picker_buttons"
+            android:checked="true"
+            android:text="@string/sunday" />
+
+        <RadioButton
+            android:id="@+id/monday_button"
+            style="@style/day_picker_buttons"
+            android:text="@string/monday" />
+
+        <RadioButton
+            android:id="@+id/tuesday_button"
+            style="@style/day_picker_buttons"
+            android:text="@string/tuesday" />
+
+        <RadioButton
+            android:id="@+id/wednesday_button"
+            style="@style/day_picker_buttons"
+            android:text="@string/wednesday" />
+
+        <RadioButton
+            android:id="@+id/thursday_button"
+            style="@style/day_picker_buttons"
+            android:text="@string/thursday" />
+
+        <RadioButton
+            android:id="@+id/friday_button"
+            style="@style/day_picker_buttons"
+            android:text="@string/friday" />
+
+        <RadioButton
+            android:id="@+id/saturday_button"
+            style="@style/day_picker_buttons"
+            android:text="@string/saturday" />
+
+    </RadioGroup>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

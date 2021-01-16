@@ -125,19 +125,19 @@
 
                 <RadioButton
                     android:id="@+id/femaleButton"
-                    style="@style/form_radio_buttons"
+                    style="@style/activity_factor_buttons"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/radio_states_green"
+                    android:background="@drawable/activity_factor_button_bg"
                     android:checked="true"
                     android:text="@string/female" />
 
                 <RadioButton
                     android:id="@+id/maleButton"
-                    style="@style/form_radio_buttons"
+                    style="@style/activity_factor_buttons"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/radio_states_green"
+                    android:background="@drawable/activity_factor_button_bg"
                     android:text="@string/male" />
 
             </RadioGroup>
@@ -165,48 +165,29 @@
 
                 <RadioButton
                     android:id="@+id/activityFactorButton1"
-                    style="@style/form_radio_buttons"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_marginVertical="4dp"
-                    android:background="@drawable/radio_states_green"
+                    style="@style/activity_factor_buttons"
+                    android:background="@drawable/activity_factor_button_bg"
                     android:checked="true"
                     android:text="@string/activity_factor_1" />
 
                 <RadioButton
                     android:id="@+id/activityFactorButton2"
-                    style="@style/form_radio_buttons"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_marginVertical="4dp"
-                    android:background="@drawable/radio_states_green"
+                    style="@style/activity_factor_buttons"
                     android:text="@string/activity_factor_2" />
 
                 <RadioButton
                     android:id="@+id/activityFactorButton3"
-                    style="@style/form_radio_buttons"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_marginVertical="4dp"
-                    android:background="@drawable/radio_states_green"
+                    style="@style/activity_factor_buttons"
                     android:text="@string/activity_factor_3" />
 
                 <RadioButton
                     android:id="@+id/activityFactorButton4"
-                    style="@style/form_radio_buttons"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_marginVertical="4dp"
-                    android:background="@drawable/radio_states_green"
+                    style="@style/activity_factor_buttons"
                     android:text="@string/activity_factor_4" />
 
                 <RadioButton
                     android:id="@+id/activityFactorButton5"
-                    style="@style/form_radio_buttons"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_marginVertical="4dp"
-                    android:background="@drawable/radio_states_green"
+                    style="@style/activity_factor_buttons"
                     android:text="@string/activity_factor_5" />
 
             </RadioGroup>

@@ -28,9 +28,9 @@ class MealFragment : Fragment(), View.OnClickListener {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        super.onCreate(savedInstanceState)
+        super.onCreateView(inflater, container, savedInstanceState)
         val inputFragmentView = inflater.inflate(R.layout.fragment_meal, container, false)
-        Log.d(TAG.TAG, "[onCreate] initialize activity")
+        Log.d(TAG, "[onCreateView] initialize activity")
 
         addMealButton = inputFragmentView.findViewById(R.id.add_meal_button)
         testButton = inputFragmentView.findViewById(R.id.test_button)
@@ -87,7 +87,7 @@ class MealFragment : Fragment(), View.OnClickListener {
         return "${mealDateEditText.editableText}_${mealTimeEditText.editableText}"
     }
 
-    object TAG {
+    companion object {
         const val TAG = "MealFragment"
     }
 }

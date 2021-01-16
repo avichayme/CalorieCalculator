@@ -26,11 +26,27 @@
         <item name="android:textSize">24sp</item>
     </style>
 
-    <style name="form_radio_buttons">
+    <style name="activity_factor_buttons">
         <item name="android:layout_weight">1</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">0dp</item>
         <item name="android:button">@null</item>
         <item name="android:gravity">center</item>
-        <item name="android:textColor">@drawable/radio_text</item>
+        <item name="android:background">@drawable/activity_factor_button_bg</item>
+        <item name="android:textColor">@drawable/activity_factor_button_text</item>
+        <item name="android:padding">8dp</item>
+        <item name="android:layout_marginVertical">4dp</item>
+    </style>
+
+    <style name="day_picker_buttons">
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:button">@null</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@drawable/day_picker_button_text</item>
+        <item name="android:background">@drawable/day_picker_button_bg</item>
+        <item name="android:layout_margin">8dp</item>
         <item name="android:padding">8dp</item>
     </style>
 
