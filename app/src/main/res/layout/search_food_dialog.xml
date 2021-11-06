@@ -23,15 +23,6 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:text="HELP" />
 
-<!--    <androidx.constraintlayout.widget.ConstraintLayout-->
-<!--        android:id="@+id/addMealFormScrollView"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_margin="16dp"-->
-
-<!--        app:layout_constraintTop_toBottomOf="@+id/statusTextView"-->
-<!--        tools:layout_editor_absoluteX="16dp">-->
-
         <LinearLayout
             android:id="@+id/searchFoodLayout"
             android:layout_width="match_parent"
@@ -62,8 +53,6 @@
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/searchFoodLayout" />
-
-<!--    </androidx.constraintlayout.widget.ConstraintLayout>-->
 
     <Button
         android:id="@+id/add_meal_button"

@@ -53,4 +53,6 @@
     <string name="thursday">T</string>
     <string name="friday">F</string>
     <string name="saturday">S</string>
+    <string name="compose_a_meal">compose a meal</string>
+    <string name="app_icon_image_view_desc">app_icon</string>
 </resources>

@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_margin="16dp"
     android:background="@color/blue_grey_700"
     tools:context=".MainActivity">
 
@@ -106,5 +107,40 @@
             android:text="@string/saturday" />
 
     </RadioGroup>
+
+    <ListView
+        android:id="@+id/daily_consumption_list_view"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@id/water_progress_bar_layout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/day_of_week_picker" />
+
+    <LinearLayout
+        android:id="@+id/water_progress_bar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@id/calorie_consumption_text_view"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/daily_consumption_list_view">
+
+        <com.meiri.caloriecalculator.WaterProgressBar
+            android:id="@+id/water_progress_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/calorie_consumption_text_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/water_progress_bar_layout"
+        tools:text="Total calorie consumption: 700/1000" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

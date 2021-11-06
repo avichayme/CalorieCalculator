@@ -2,9 +2,16 @@ package com.meiri.caloriecalculator
 
 import org.json.JSONException
 import org.json.JSONObject
+import java.util.HashMap
 import kotlin.math.roundToInt
 
-class Food(var foodId: String, var foodName: String, var calories: Double, var imgURL: String) {
+data class Food(
+    var foodId: String = "",
+    var foodName: String = "",
+    var calories: Double = 0.0,
+    var imgURL: String = ""
+) {
+
     init {
         calories = (calories * 100).roundToInt() / 100.0
     }

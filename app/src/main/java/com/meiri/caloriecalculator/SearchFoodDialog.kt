@@ -55,6 +55,8 @@ class SearchFoodDialog(c: Activity, themeResId: Int) : Dialog(c, themeResId), Vi
         foodList = Food.getRecipesFromRequest(response)
         val adapter = FoodAdapter(context, foodList)
         foodItemsListView.adapter = adapter
+        if (foodList.size == 0)
+            Toast.makeText(context, "Oops! we couldn't find what you're looking for", Toast.LENGTH_SHORT).show()
     }
 
     companion object {

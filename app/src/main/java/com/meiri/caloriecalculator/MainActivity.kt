@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager.widget.ViewPager
@@ -19,15 +18,15 @@ import com.google.android.material.tabs.TabLayout
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 
-enum class State {LOGGED_OFF, SIGN_UP, FULL_REGISTERED}
+enum class State {LOGGED_OFF, LOGGED_IN, SIGN_UP, FULL_REGISTERED}
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var signInButton: SignInButton
-    private lateinit var welcomeTextView: TextView
     private lateinit var viewPager: ViewPager
     private lateinit var tabLayout: TabLayout
     private lateinit var mGoogleSignInClient: GoogleSignInClient
     private lateinit var adapter: TabAdapter
+    private lateinit var welcomeLayout: View
     private var state: State = State.LOGGED_OFF
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,8 +34,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         setContentView(R.layout.activity_main)
         Log.i(TAG, "[onCreate]")
 
+        welcomeLayout = findViewById(R.id.welcome_layout)
         signInButton = findViewById(R.id.sign_in_button)
-        welcomeTextView = findViewById(R.id.welcome_text_view)
         viewPager = findViewById(R.id.main_view_pager)
         tabLayout = findViewById(R.id.main_tab_layout)
 
@@ -59,6 +58,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         Log.i(TAG, "[updateState]")
         when (state) {
             State.LOGGED_OFF -> initializeActivity()
+            State.LOGGED_IN -> checkUserRegistration()
             State.SIGN_UP -> signIn()
             State.FULL_REGISTERED -> startMainActivity()
         }
@@ -68,6 +68,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         Log.d(TAG, "[initializeActivity] starting")
         // Initialize Firebase Auth
         mFirebaseAuth = FirebaseAuth.getInstance()
+
+        if (mFirebaseAuth.currentUser != null) {
+            user = User(mFirebaseAuth.currentUser?.uid!!)
+        }
 
         // Configure sign-in to request the user's ID, email address, and basic
         // profile. ID and basic profile are included in DEFAULT_SIGN_IN.
@@ -79,14 +83,22 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         // Build a GoogleSignInClient with the options specified by gso.
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso)
 
-        if (getUserID() != null) {
-            Log.d(TAG, "[initializeActivity] User is full registered")
-            state = State.FULL_REGISTERED
+        signInButton.setOnClickListener(this)
+
+        if (mFirebaseAuth.currentUser != null) {
+            state = State.LOGGED_IN
             updateState()
         }
-
-        signInButton.setOnClickListener(this)
         Log.d(TAG, "[initializeActivity] finish")
+    }
+
+    private fun checkUserRegistration() {
+        state = if (user.registered) {
+            State.FULL_REGISTERED
+        } else {
+            State.SIGN_UP
+        }
+        updateState()
     }
 
     private fun signIn() {
@@ -106,6 +118,17 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             val task = GoogleSignIn.getSignedInAccountFromIntent(data)
             handleSignInResult(task)
         }
+
+        // Result returned from launching the Intent SignInActivity;
+        if (requestCode == APP_SIGN_UP) {
+            @Suppress("UNCHECKED_CAST")
+            val userData = data?.getSerializableExtra("user_data") as HashMap<String, Any>
+            signUserToDB(userData)
+        }
+    }
+
+    private fun signUserToDB(userData: HashMap<String, Any>) {
+        user.fromDatabaseRecord(userData)
     }
 
     private fun handleSignInResult(completedTask: Task<GoogleSignInAccount>) {
@@ -151,13 +174,12 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         Log.i(TAG, "[createNewUser] creating new user with id $uid")
         val intent = Intent(this, SignInActivity::class.java)
         intent.putExtra("user_id", uid)
-        startActivity(intent)
+        startActivityForResult(intent, APP_SIGN_UP)
     }
 
     private fun startMainActivity() {
         Log.i(TAG, "[startMainActivity]")
-        welcomeTextView.visibility = View.GONE
-        signInButton.visibility = View.GONE
+        welcomeLayout.visibility = View.GONE
         adapter = TabAdapter(supportFragmentManager)
         adapter.addFragment(DailyLogFragment(), "Tab 1")
         adapter.addFragment(MealFragment(), "Tab 2")
@@ -169,7 +191,9 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     companion object {
         private lateinit var mFirebaseAuth: FirebaseAuth
+        private lateinit var user: User
         private const val TAG = "MainActivity"
+        private const val APP_SIGN_UP = 1
         private const val RC_SIGN_IN = 9001
 
         fun getUserID(): String? {
