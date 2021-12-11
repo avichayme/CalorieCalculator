@@ -48,7 +48,7 @@
                     android:text="@string/birthday" />
 
                 <EditText
-                    android:id="@+id/birthDateEditText"
+                    android:id="@+id/birth_date_edit_text"
                     style="@style/form_fields"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -69,11 +69,11 @@
                 <TextView
                     android:id="@+id/heightTextView"
                     style="@style/form_text"
-                    android:labelFor="@id/heightEditText"
+                    android:labelFor="@id/height_edit_text"
                     android:text="@string/height" />
 
                 <EditText
-                    android:id="@+id/heightEditText"
+                    android:id="@+id/height_edit_text"
                     style="@style/form_fields"
                     android:autofillHints=""
                     android:ems="2"
@@ -97,11 +97,11 @@
                 <TextView
                     android:id="@+id/weightTextView"
                     style="@style/form_text"
-                    android:labelFor="@id/weightEditText"
+                    android:labelFor="@id/weight_edit_text"
                     android:text="@string/weight" />
 
                 <EditText
-                    android:id="@+id/weightEditText"
+                    android:id="@+id/weight_edit_text"
                     style="@style/form_fields"
                     android:autofillHints=""
                     android:ems="2"
@@ -115,7 +115,7 @@
             </LinearLayout>
 
             <RadioGroup
-                android:id="@+id/genderLayout"
+                android:id="@+id/gender_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
@@ -150,10 +150,10 @@
                 android:layout_marginTop="16dp"
                 android:text="@string/choose_activity_factor"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/genderLayout" />
+                app:layout_constraintTop_toBottomOf="@+id/gender_layout" />
 
             <RadioGroup
-                android:id="@+id/activityFactorLayout"
+                android:id="@+id/activity_factor_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
@@ -164,29 +164,29 @@
                 app:layout_constraintTop_toBottomOf="@id/activityFactorTextView">
 
                 <RadioButton
-                    android:id="@+id/activityFactorButton1"
+                    android:id="@+id/activity_factor_button1"
                     style="@style/activity_factor_buttons"
                     android:background="@drawable/activity_factor_button_bg"
                     android:checked="true"
                     android:text="@string/activity_factor_1" />
 
                 <RadioButton
-                    android:id="@+id/activityFactorButton2"
+                    android:id="@+id/activity_factor_button2"
                     style="@style/activity_factor_buttons"
                     android:text="@string/activity_factor_2" />
 
                 <RadioButton
-                    android:id="@+id/activityFactorButton3"
+                    android:id="@+id/activity_factor_button3"
                     style="@style/activity_factor_buttons"
                     android:text="@string/activity_factor_3" />
 
                 <RadioButton
-                    android:id="@+id/activityFactorButton4"
+                    android:id="@+id/activity_factor_button4"
                     style="@style/activity_factor_buttons"
                     android:text="@string/activity_factor_4" />
 
                 <RadioButton
-                    android:id="@+id/activityFactorButton5"
+                    android:id="@+id/activity_factor_button5"
                     style="@style/activity_factor_buttons"
                     android:text="@string/activity_factor_5" />
 
@@ -197,7 +197,7 @@
     </ScrollView>
 
     <Button
-        android:id="@+id/registerButton"
+        android:id="@+id/register_button"
         android:text="@string/lets_start"
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"

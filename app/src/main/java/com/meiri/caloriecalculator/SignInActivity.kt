@@ -27,10 +27,10 @@ class SignInActivity : AppCompatActivity(), View.OnClickListener {
         Log.d(TAG, "[onCreate] initialize activity")
         user = User(intent.getStringExtra("user_id")!!)
 
-        birthDateEditText = findViewById(R.id.birthDateEditText)
-        registerButton = findViewById(R.id.registerButton)
-        genderLayout = findViewById(R.id.genderLayout)
-        activityFactorLayout = findViewById(R.id.activityFactorLayout)
+        birthDateEditText = findViewById(R.id.birth_date_edit_text)
+        registerButton = findViewById(R.id.register_button)
+        genderLayout = findViewById(R.id.gender_layout)
+        activityFactorLayout = findViewById(R.id.activity_factor_layout)
 
         birthDateEditText.addTextChangedListener(DateTextWatcher())
         registerButton.setOnClickListener(this)
@@ -39,8 +39,8 @@ class SignInActivity : AppCompatActivity(), View.OnClickListener {
     private fun returnUserInfo() {
         val userData: HashMap<String, Any> = HashMap()
         userData["birth_date"] = birthDateEditText.text.toString()
-        userData["height"] = findViewById<EditText>(R.id.heightEditText).text.toString().toLong()
-        userData["weight"] = findViewById<EditText>(R.id.weightEditText).text.toString().toLong()
+        userData["height"] = findViewById<EditText>(R.id.height_edit_text).text.toString().toLong()
+        userData["weight"] = findViewById<EditText>(R.id.weight_edit_text).text.toString().toLong()
         userData["gender"] = findViewById<RadioButton>(genderLayout.checkedRadioButtonId).text.toString()
         userData["activity_factor"] = findViewById<RadioButton>(activityFactorLayout.checkedRadioButtonId).text.toString().toDouble()
 
