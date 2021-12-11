@@ -183,7 +183,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         adapter = TabAdapter(supportFragmentManager)
         adapter.addFragment(DailyLogFragment(), "Tab 1")
         adapter.addFragment(MealFragment(), "Tab 2")
-        adapter.addFragment(Tab3Fragment(), "Tab 3")
+        adapter.addFragment(UserSettingsFragment(), "Tab 3")
 
         viewPager.adapter = adapter
         tabLayout.setupWithViewPager(viewPager)
