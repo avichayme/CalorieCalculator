@@ -43,6 +43,10 @@ class User(val userId: String) {
     private val usersRef = Firebase.database.getReference("users")
     private val formatter = DateTimeFormatter.ofPattern("yyyy-M-d")
 
+    fun getBirthDateFormatted() : String {
+        return birthDate.format(formatter)
+    }
+
     private fun updateUserFromDatabase() {
         val listener = object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
