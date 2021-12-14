@@ -11,9 +11,10 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.RadioButton
 import android.widget.RadioGroup
-import androidx.core.view.children
-import androidx.core.view.forEach
 import androidx.fragment.app.Fragment
+import android.graphics.drawable.LayerDrawable
+import androidx.core.view.children
+
 
 class UserSettingsFragment : Fragment() {
     private lateinit var birthDateEditText: EditText
@@ -39,6 +40,8 @@ class UserSettingsFragment : Fragment() {
         genderLayout = inputFragmentView.findViewById(R.id.gender_layout)
         activityFactorLayout = inputFragmentView.findViewById(R.id.activity_factor_layout)
         registerButton = inputFragmentView.findViewById(R.id.register_button)
+
+        registerButton.text = "Update!"
         setUserDetails()
 
         return inputFragmentView
@@ -48,17 +51,22 @@ class UserSettingsFragment : Fragment() {
         birthDateEditText.setText(user.getBirthDateFormatted())
         heightEditText.setText(user.height.toString())
         weightLayout.setText(user.weight.toString())
-        for (i in 0 until genderLayout.childCount) {
-            if (user.gender == (genderLayout.getChildAt(i) as RadioButton).text.toString()) {
-                genderLayout.check(genderLayout.getChildAt(i).id)
-                break
-            }
-        }
-        for (i in 0 until activityFactorLayout.childCount) {
-            if (user.activityFactor == (activityFactorLayout.getChildAt(i) as RadioButton).text.toString().toDouble()) {
-                activityFactorLayout.check(activityFactorLayout.getChildAt(i).id)
-                break
-            }
-        }
+        (genderLayout.children.filter { (it as RadioButton).text.toString() == user.gender }
+            .first() as RadioButton).isChecked = true
+//        for (i in 0 until genderLayout.childCount) {
+//            if (user.gender == (genderLayout.getChildAt(i) as RadioButton).text.toString()) {
+//                genderLayout.check(genderLayout.getChildAt(i).id)
+//                break
+//            }
+//        }
+        (activityFactorLayout.children.filter {
+            (it as RadioButton).hint.toString().toDouble() == user.activityFactor
+        }.first() as RadioButton).isChecked = true
+//        for (i in 0 until activityFactorLayout.childCount) {
+//            if (user.activityFactor == (activityFactorLayout.getChildAt(i) as RadioButton).hint.toString().toDouble()) {
+//                activityFactorLayout.check(activityFactorLayout.getChildAt(i).id)
+//                break
+//            }
+//        }
     }
 }

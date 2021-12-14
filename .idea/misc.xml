@@ -3,17 +3,47 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/meiria/StudioProjects/CalorieCalculator/app/src/main/res/drawable-mdpi/activity_factor_button_selected.xml" value="0.2814814814814815" />
+        <entry key="..\:/Users/meiria/StudioProjects/CalorieCalculator/app/src/main/res/drawable-mdpi/radio_button_selected.xml" value="0.3453125" />
+        <entry key="..\:/Users/meiria/StudioProjects/CalorieCalculator/app/src/main/res/drawable-mdpi/radio_button_unselected2.xml" value="0.3453125" />
         <entry key="..\:/Users/meiria/StudioProjects/CalorieCalculator/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.35" />
         <entry key="..\:/Users/meiria/StudioProjects/CalorieCalculator/app/src/main/res/drawable/activity_factor_button_bg.xml" value="0.35" />
         <entry key="..\:/Users/meiria/StudioProjects/CalorieCalculator/app/src/main/res/drawable/activity_factor_button_text.xml" value="0.35" />
+        <entry key="..\:/Users/meiria/StudioProjects/CalorieCalculator/app/src/main/res/drawable/af0_radio_button_bg.xml" value="0.26615384615384613" />
+        <entry key="..\:/Users/meiria/StudioProjects/CalorieCalculator/app/src/main/res/drawable/af0_radio_button_selected.xml" value="0.26615384615384613" />
+        <entry key="..\:/Users/meiria/StudioProjects/CalorieCalculator/app/src/main/res/drawable/af1_radio_button_bg.xml" value="0.26615384615384613" />
+        <entry key="..\:/Users/meiria/StudioProjects/CalorieCalculator/app/src/main/res/drawable/af1_radio_button_selected.xml" value="0.26615384615384613" />
+        <entry key="..\:/Users/meiria/StudioProjects/CalorieCalculator/app/src/main/res/drawable/af1_radio_button_unselected.xml" value="0.26615384615384613" />
+        <entry key="..\:/Users/meiria/StudioProjects/CalorieCalculator/app/src/main/res/drawable/af2_radio_button_bg.xml" value="0.26615384615384613" />
+        <entry key="..\:/Users/meiria/StudioProjects/CalorieCalculator/app/src/main/res/drawable/af2_radio_button_selected.xml" value="0.26615384615384613" />
+        <entry key="..\:/Users/meiria/StudioProjects/CalorieCalculator/app/src/main/res/drawable/af2_radio_button_unselected.xml" value="0.26615384615384613" />
+        <entry key="..\:/Users/meiria/StudioProjects/CalorieCalculator/app/src/main/res/drawable/af3_radio_button_bg.xml" value="0.26615384615384613" />
+        <entry key="..\:/Users/meiria/StudioProjects/CalorieCalculator/app/src/main/res/drawable/af3_radio_button_selected.xml" value="0.26615384615384613" />
+        <entry key="..\:/Users/meiria/StudioProjects/CalorieCalculator/app/src/main/res/drawable/af3_radio_button_unselected.xml" value="0.26615384615384613" />
+        <entry key="..\:/Users/meiria/StudioProjects/CalorieCalculator/app/src/main/res/drawable/af4_radio_button_bg.xml" value="0.26615384615384613" />
+        <entry key="..\:/Users/meiria/StudioProjects/CalorieCalculator/app/src/main/res/drawable/af4_radio_button_selected.xml" value="0.26615384615384613" />
+        <entry key="..\:/Users/meiria/StudioProjects/CalorieCalculator/app/src/main/res/drawable/af4_radio_button_unselected.xml" value="0.26615384615384613" />
+        <entry key="..\:/Users/meiria/StudioProjects/CalorieCalculator/app/src/main/res/drawable/day_picker_button_bg.xml" value="0.3453125" />
         <entry key="..\:/Users/meiria/StudioProjects/CalorieCalculator/app/src/main/res/drawable/day_picker_button_text.xml" value="0.35" />
+        <entry key="..\:/Users/meiria/StudioProjects/CalorieCalculator/app/src/main/res/drawable/female_radio_button_bg.xml" value="0.26615384615384613" />
+        <entry key="..\:/Users/meiria/StudioProjects/CalorieCalculator/app/src/main/res/drawable/female_radio_button_selected.xml" value="0.26615384615384613" />
+        <entry key="..\:/Users/meiria/StudioProjects/CalorieCalculator/app/src/main/res/drawable/female_radio_button_unselected.xml" value="0.26615384615384613" />
         <entry key="..\:/Users/meiria/StudioProjects/CalorieCalculator/app/src/main/res/drawable/ic_launcher_background.xml" value="0.35" />
+        <entry key="..\:/Users/meiria/StudioProjects/CalorieCalculator/app/src/main/res/drawable/male_radio_button_bg.xml" value="0.26615384615384613" />
+        <entry key="..\:/Users/meiria/StudioProjects/CalorieCalculator/app/src/main/res/drawable/male_radio_button_selected.xml" value="0.26615384615384613" />
+        <entry key="..\:/Users/meiria/StudioProjects/CalorieCalculator/app/src/main/res/drawable/male_radio_button_unselected.xml" value="0.26615384615384613" />
+        <entry key="..\:/Users/meiria/StudioProjects/CalorieCalculator/app/src/main/res/drawable/radio_button_selected.xml" value="0.340625" />
+        <entry key="..\:/Users/meiria/StudioProjects/CalorieCalculator/app/src/main/res/drawable/radio_button_unselected.xml" value="0.3453125" />
+        <entry key="..\:/Users/meiria/StudioProjects/CalorieCalculator/app/src/main/res/drawable/radio_on_green.xml" value="0.2814814814814815" />
+        <entry key="..\:/Users/meiria/StudioProjects/CalorieCalculator/app/src/main/res/layout/activity_factor_button.xml" value="0.32447916666666665" />
         <entry key="..\:/Users/meiria/StudioProjects/CalorieCalculator/app/src/main/res/layout/activity_main.xml" value="0.32447916666666665" />
-        <entry key="..\:/Users/meiria/StudioProjects/CalorieCalculator/app/src/main/res/layout/activity_sign_in.xml" value="0.72" />
+        <entry key="..\:/Users/meiria/StudioProjects/CalorieCalculator/app/src/main/res/layout/activity_sign_in.xml" value="0.8" />
         <entry key="..\:/Users/meiria/StudioProjects/CalorieCalculator/app/src/main/res/layout/daily_log_item.xml" value="0.33125" />
+        <entry key="..\:/Users/meiria/StudioProjects/CalorieCalculator/app/src/main/res/layout/daily_log_item1.xml" value="0.264" />
         <entry key="..\:/Users/meiria/StudioProjects/CalorieCalculator/app/src/main/res/layout/fragment_daily_log.xml" value="0.23541666666666666" />
         <entry key="..\:/Users/meiria/StudioProjects/CalorieCalculator/app/src/main/res/layout/fragment_meal.xml" value="1.0" />
         <entry key="..\:/Users/meiria/StudioProjects/CalorieCalculator/app/src/main/res/layout/fragment_two.xml" value="0.2695035460992908" />
+        <entry key="..\:/Users/meiria/StudioProjects/CalorieCalculator/app/src/main/res/layout/list_item_food.xml" value="0.2346014492753623" />
       </map>
     </option>
   </component>

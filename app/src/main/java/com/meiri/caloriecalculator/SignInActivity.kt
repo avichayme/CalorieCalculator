@@ -42,8 +42,7 @@ class SignInActivity : AppCompatActivity(), View.OnClickListener {
         userData["height"] = findViewById<EditText>(R.id.height_edit_text).text.toString().toLong()
         userData["weight"] = findViewById<EditText>(R.id.weight_edit_text).text.toString().toLong()
         userData["gender"] = findViewById<RadioButton>(genderLayout.checkedRadioButtonId).text.toString()
-        userData["activity_factor"] = findViewById<RadioButton>(activityFactorLayout.checkedRadioButtonId).text.toString().toDouble()
-
+        userData["activity_factor"] = findViewById<RadioButton>(activityFactorLayout.checkedRadioButtonId).hint.toString().toDouble()
         val resultIntent = Intent()
         resultIntent.putExtra("user_data", userData)
         setResult(Activity.RESULT_OK, resultIntent)
