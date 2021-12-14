@@ -125,19 +125,19 @@
 
                 <RadioButton
                     android:id="@+id/femaleButton"
-                    style="@style/activity_factor_buttons"
+                    style="@style/sign_in_radio_buttons"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/activity_factor_button_bg"
+                    android:background="@drawable/female_radio_button_bg"
                     android:checked="true"
                     android:text="@string/female" />
 
                 <RadioButton
                     android:id="@+id/maleButton"
-                    style="@style/activity_factor_buttons"
+                    style="@style/sign_in_radio_buttons"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/activity_factor_button_bg"
+                    android:background="@drawable/male_radio_button_bg"
                     android:text="@string/male" />
 
             </RadioGroup>
@@ -164,31 +164,40 @@
                 app:layout_constraintTop_toBottomOf="@id/activityFactorTextView">
 
                 <RadioButton
-                    android:id="@+id/activity_factor_button1"
-                    style="@style/activity_factor_buttons"
-                    android:background="@drawable/activity_factor_button_bg"
+                    android:id="@+id/activity_factor_button0"
+                    style="@style/sign_in_radio_buttons"
+                    android:background="@drawable/af0_radio_button_bg"
                     android:checked="true"
-                    android:text="@string/activity_factor_1" />
+                    android:hint="@string/af0_hint"
+                    android:text="@string/af0_text" />
+
+                <RadioButton
+                    android:id="@+id/activity_factor_button1"
+                    style="@style/sign_in_radio_buttons"
+                    android:background="@drawable/af1_radio_button_bg"
+                    android:hint="@string/af1_hint"
+                    android:text="@string/af1_text" />
 
                 <RadioButton
                     android:id="@+id/activity_factor_button2"
-                    style="@style/activity_factor_buttons"
-                    android:text="@string/activity_factor_2" />
+                    style="@style/sign_in_radio_buttons"
+                    android:background="@drawable/af2_radio_button_bg"
+                    android:hint="@string/af2_hint"
+                    android:text="@string/af2_text" />
 
                 <RadioButton
                     android:id="@+id/activity_factor_button3"
-                    style="@style/activity_factor_buttons"
-                    android:text="@string/activity_factor_3" />
+                    style="@style/sign_in_radio_buttons"
+                    android:background="@drawable/af3_radio_button_bg"
+                    android:hint="@string/af3_hint"
+                    android:text="@string/af3_text" />
 
                 <RadioButton
                     android:id="@+id/activity_factor_button4"
-                    style="@style/activity_factor_buttons"
-                    android:text="@string/activity_factor_4" />
-
-                <RadioButton
-                    android:id="@+id/activity_factor_button5"
-                    style="@style/activity_factor_buttons"
-                    android:text="@string/activity_factor_5" />
+                    style="@style/sign_in_radio_buttons"
+                    android:background="@drawable/af4_radio_button_bg"
+                    android:hint="@string/af4_hint"
+                    android:text="@string/af4_text" />
 
             </RadioGroup>
 
@@ -198,13 +207,13 @@
 
     <Button
         android:id="@+id/register_button"
+        style="@style/form_buttons"
         android:text="@string/lets_start"
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/signInFormScrollView"
-        app:layout_constraintVertical_bias="1.0"
-        style="@style/form_buttons" />
+        app:layout_constraintVertical_bias="1.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
