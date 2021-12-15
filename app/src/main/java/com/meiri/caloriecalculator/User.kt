@@ -41,10 +41,10 @@ class User(val userId: String) {
         get() = (bmr * activityFactor).roundToInt() / 100.0
 
     private val usersRef = Firebase.database.getReference("users")
-    private val formatter = DateTimeFormatter.ofPattern("yyyy-M-d")
+    val formatter = DateTimeFormatter.ofPattern("d-M-yyyy")
 
     fun getBirthDateFormatted() : String {
-        return birthDate.format(formatter)
+        return birthDate.format(formatter).replace("-", "/")
     }
 
     private fun updateUserFromDatabase() {
@@ -70,7 +70,7 @@ class User(val userId: String) {
         usersRef.addListenerForSingleValueEvent(listener)
     }
 
-    private fun saveToDatabase() {
+    fun saveToDatabase() {
         usersRef.child(userId).setValue(toDatabaseRecord())
         registered = true
     }
@@ -86,11 +86,11 @@ class User(val userId: String) {
     }
 
     fun fromDatabaseRecord(userData: MutableMap<String, Any>) {
-        birthDate = LocalDate.parse((userData["birth_date"] as String).replace("/", "-"), formatter)
+        birthDate = LocalDate.parse(userData["birth_date"].toString().replace("/", "-"), formatter)
         height = userData["height"] as Long
         weight = userData["weight"] as Long
         gender = userData["gender"] as String
-        activityFactor = userData["gender"] as Double
+        activityFactor = userData["activity_factor"] as Double
 
         saveToDatabase()
     }

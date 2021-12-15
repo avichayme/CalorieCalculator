@@ -50,18 +50,18 @@ class MealFragment : Fragment(), View.OnClickListener {
         when (v) {
             addMealButton -> addMealToDB()
             composeMealButton -> {
-                val cdd = SearchFoodDialog(activity!!, android.R.style.Theme_NoTitleBar_Fullscreen)
+                val cdd = SearchFoodDialog(requireActivity(), android.R.style.Theme_NoTitleBar_Fullscreen)
                 cdd.show()
 
                 val foodItemsListView: ListView = cdd.findViewById(R.id.food_items_list_view)
                 foodItemsListView.onItemClickListener =
                     OnItemClickListener { _, _, position, _ ->
-                        Toast.makeText(activity!!.applicationContext, "Click ListItem Number $position", Toast.LENGTH_LONG).show()
+                        Toast.makeText(requireActivity().applicationContext, "Click ListItem Number $position", Toast.LENGTH_LONG).show()
                         foodItemChangeMode(foodItemsListView.adapter.getItem(position) as Food)
                     }
 
                 cdd.setOnCancelListener {
-                    val adapter = FoodAdapter(activity!!.applicationContext, foodList)
+                    val adapter = FoodAdapter(requireActivity().applicationContext, foodList)
                     selectedFoodItemsListView.adapter = adapter
                 }
             }
@@ -76,8 +76,8 @@ class MealFragment : Fragment(), View.OnClickListener {
     }
 
     private fun addMealToDB() {
-        val userID = MainActivity.getUserID()
-        val userMealDiary = mealDiary.child(userID!!).child(getLogTime())
+        val userID = MainActivity.getUser().userId
+        val userMealDiary = mealDiary.child(userID).child(getLogTime())
         userMealDiary.setValue(foodList)
         mealDiary.push()
     }

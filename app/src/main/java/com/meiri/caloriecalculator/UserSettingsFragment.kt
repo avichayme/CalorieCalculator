@@ -1,9 +1,6 @@
 package com.meiri.caloriecalculator
 
-//import android.R
 import android.os.Bundle
-
-
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,11 +9,11 @@ import android.widget.EditText
 import android.widget.RadioButton
 import android.widget.RadioGroup
 import androidx.fragment.app.Fragment
-import android.graphics.drawable.LayerDrawable
 import androidx.core.view.children
+import java.time.LocalDate
 
 
-class UserSettingsFragment : Fragment() {
+class UserSettingsFragment : Fragment(), View.OnClickListener {
     private lateinit var birthDateEditText: EditText
     private lateinit var heightEditText: EditText
     private lateinit var weightLayout: EditText
@@ -33,7 +30,7 @@ class UserSettingsFragment : Fragment() {
         super.onCreateView(inflater, container, savedInstanceState)
         val inputFragmentView = inflater.inflate(R.layout.activity_sign_in, container, false)
 
-        user = User(MainActivity.getUserID()!!)
+        user = MainActivity.getUser()
         birthDateEditText = inputFragmentView.findViewById(R.id.birth_date_edit_text)
         heightEditText = inputFragmentView.findViewById(R.id.height_edit_text)
         weightLayout = inputFragmentView.findViewById(R.id.weight_edit_text)
@@ -44,6 +41,7 @@ class UserSettingsFragment : Fragment() {
         registerButton.text = "Update!"
         setUserDetails()
 
+        registerButton.setOnClickListener(this)
         return inputFragmentView
     }
 
@@ -53,20 +51,23 @@ class UserSettingsFragment : Fragment() {
         weightLayout.setText(user.weight.toString())
         (genderLayout.children.filter { (it as RadioButton).text.toString() == user.gender }
             .first() as RadioButton).isChecked = true
-//        for (i in 0 until genderLayout.childCount) {
-//            if (user.gender == (genderLayout.getChildAt(i) as RadioButton).text.toString()) {
-//                genderLayout.check(genderLayout.getChildAt(i).id)
-//                break
-//            }
-//        }
         (activityFactorLayout.children.filter {
             (it as RadioButton).hint.toString().toDouble() == user.activityFactor
         }.first() as RadioButton).isChecked = true
-//        for (i in 0 until activityFactorLayout.childCount) {
-//            if (user.activityFactor == (activityFactorLayout.getChildAt(i) as RadioButton).hint.toString().toDouble()) {
-//                activityFactorLayout.check(activityFactorLayout.getChildAt(i).id)
-//                break
-//            }
-//        }
+    }
+
+    private fun updateUserInfo() {
+        user.birthDate = LocalDate.parse(birthDateEditText.text.toString().replace("/", "-"), user.formatter)
+        user.height = heightEditText.text.toString().toLong()
+        user.weight = weightLayout.text.toString().toLong()
+        user.gender = (genderLayout.children.first { it.id == genderLayout.checkedRadioButtonId } as RadioButton).text.toString()
+        user.activityFactor = (activityFactorLayout.children.first { it.id == activityFactorLayout.checkedRadioButtonId } as RadioButton).hint.toString().toDouble()
+        user.saveToDatabase()
+    }
+
+    override fun onClick(v: View?) {
+        when (v) {
+            registerButton -> updateUserInfo()
+        }
     }
 }

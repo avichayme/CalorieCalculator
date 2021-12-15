@@ -123,7 +123,7 @@ class DailyLogFragment : Fragment(), View.OnClickListener, RadioGroup.OnCheckedC
     private fun getUserLog() {
         val listener = object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
-                val uid = MainActivity.getUserID()!!
+                val uid = MainActivity.getUser().userId
 				userLog = dataSnapshot.child(uid)
                 showDailyLog()
             }

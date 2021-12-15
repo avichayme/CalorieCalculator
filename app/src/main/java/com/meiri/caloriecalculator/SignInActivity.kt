@@ -9,6 +9,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.RadioButton
 import android.widget.RadioGroup
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 
 
@@ -18,6 +19,8 @@ class SignInActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var registerButton: Button
     private lateinit var genderLayout: RadioGroup
     private lateinit var activityFactorLayout: RadioGroup
+    private lateinit var heightEditText: EditText
+    private lateinit var weightEditText: EditText
     private lateinit var user: User
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,6 +34,8 @@ class SignInActivity : AppCompatActivity(), View.OnClickListener {
         registerButton = findViewById(R.id.register_button)
         genderLayout = findViewById(R.id.gender_layout)
         activityFactorLayout = findViewById(R.id.activity_factor_layout)
+        heightEditText = findViewById(R.id.height_edit_text)
+        weightEditText = findViewById(R.id.weight_edit_text)
 
         birthDateEditText.addTextChangedListener(DateTextWatcher())
         registerButton.setOnClickListener(this)
@@ -39,8 +44,8 @@ class SignInActivity : AppCompatActivity(), View.OnClickListener {
     private fun returnUserInfo() {
         val userData: HashMap<String, Any> = HashMap()
         userData["birth_date"] = birthDateEditText.text.toString()
-        userData["height"] = findViewById<EditText>(R.id.height_edit_text).text.toString().toLong()
-        userData["weight"] = findViewById<EditText>(R.id.weight_edit_text).text.toString().toLong()
+        userData["height"] = heightEditText.text.toString().toLong()
+        userData["weight"] = weightEditText.text.toString().toLong()
         userData["gender"] = findViewById<RadioButton>(genderLayout.checkedRadioButtonId).text.toString()
         userData["activity_factor"] = findViewById<RadioButton>(activityFactorLayout.checkedRadioButtonId).hint.toString().toDouble()
         val resultIntent = Intent()

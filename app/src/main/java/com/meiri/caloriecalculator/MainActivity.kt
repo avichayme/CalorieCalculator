@@ -1,10 +1,12 @@
 package com.meiri.caloriecalculator
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager.widget.ViewPager
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -47,11 +49,9 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         Log.i(TAG, "[onClick] ${v.toString()}")
         when (v!!.id) {
             R.id.sign_in_button -> {
-                state = State.SIGN_UP
-                Log.d(TAG, "[onClick] Changing state to ${state.name}")
+                signIn()
             }
         }
-        updateState()
     }
 
     private fun updateState() {
@@ -59,7 +59,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         when (state) {
             State.LOGGED_OFF -> initializeActivity()
             State.LOGGED_IN -> checkUserRegistration()
-            State.SIGN_UP -> signIn()
+            State.SIGN_UP -> createNewUser()
             State.FULL_REGISTERED -> startMainActivity()
         }
     }
@@ -93,11 +93,12 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun checkUserRegistration() {
-        state = if (user.registered) {
-            State.FULL_REGISTERED
-        } else {
-            State.SIGN_UP
-        }
+//        state = if (user.registered) {
+//            State.FULL_REGISTERED
+//        } else {
+//            State.SIGN_UP
+//        }
+        state = State.FULL_REGISTERED
         updateState()
     }
 
@@ -128,7 +129,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun signUserToDB(userData: HashMap<String, Any>) {
+        user = User(mFirebaseAuth.currentUser?.uid!!)
         user.fromDatabaseRecord(userData)
+        state = State.FULL_REGISTERED
+        updateState()
     }
 
     private fun handleSignInResult(completedTask: Task<GoogleSignInAccount>) {
@@ -137,9 +141,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             val account = completedTask.getResult(ApiException::class.java)
             // Signed in successfully, show authenticated UI.
             firebaseAuthWithGoogle(account?.idToken!!)
-            state = State.FULL_REGISTERED
+            state = State.SIGN_UP
             Log.d(TAG, "[handleSignInResult] Changing state to ${state.name}")
-            updateState()
         } catch (e: ApiException) {
             // The ApiException status code indicates the detailed failure reason.
             // Please refer to the GoogleSignInStatusCodes class reference for more information.
@@ -157,7 +160,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                     Log.d(TAG, "[firebaseAuthWithGoogle] signInWithCredential:success")
                     val firebaseUser = mFirebaseAuth.currentUser
                     if (task.result?.additionalUserInfo?.isNewUser!!)
-                        createNewUser(firebaseUser?.uid)
+                        createNewUser()
                 } else {
                     // If sign in fails, display a message to the user.
                     Log.w(
@@ -170,7 +173,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             }
     }
 
-    private fun createNewUser(uid: String?) {
+    private fun createNewUser() {
+        var uid: String? = null
+        while (uid == null)
+            uid = mFirebaseAuth.currentUser?.uid
         Log.i(TAG, "[createNewUser] creating new user with id $uid")
         val intent = Intent(this, SignInActivity::class.java)
         intent.putExtra("user_id", uid)
@@ -196,8 +202,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         private const val APP_SIGN_UP = 1
         private const val RC_SIGN_IN = 9001
 
-        fun getUserID(): String? {
-            return mFirebaseAuth.currentUser?.uid
+        fun getUser(): User {
+            return user
         }
     }
 }
