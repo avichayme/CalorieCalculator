@@ -54,7 +54,7 @@ class User(val userId: String) {
                 val userData: HashMap<String, Any>? = dataSnapshot.child(userId).getValue(ti)
 
                 if (userData != null) {
-                    birthDate = LocalDate.parse(userData["birth_date"].toString(), formatter)
+                    birthDate = LocalDate.parse(userData["birth_date"].toString(), DateTimeFormatter.ISO_DATE)
                     height = userData["height"] as Long
                     weight = userData["weight"] as Long
                     gender = userData["gender"].toString()
