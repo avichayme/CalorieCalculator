@@ -49,7 +49,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:autofillHints=""
-                android:ems="5"
+                android:ems="6"
                 android:hint="@string/date_format"
                 android:inputType="date" />
 
@@ -74,6 +74,7 @@
                 style="@style/form_fields"
                 android:autofillHints=""
                 android:ems="3"
+                android:hint="@string/time_format"
                 android:inputType="time" />
 
         </LinearLayout>

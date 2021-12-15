@@ -14,6 +14,7 @@ import com.android.volley.toolbox.Volley
 
 class SearchFoodDialog(c: Activity, themeResId: Int) : Dialog(c, themeResId), View.OnClickListener{
     private lateinit var searchFoodButton: Button
+    private lateinit var addMealButton: Button
     private lateinit var searchFoodEditText: EditText
     private lateinit var foodItemsListView: ListView
     private var foodList: ArrayList<Food> = ArrayList()
@@ -24,15 +25,18 @@ class SearchFoodDialog(c: Activity, themeResId: Int) : Dialog(c, themeResId), Vi
         setContentView(R.layout.search_food_dialog)
 
         searchFoodButton = findViewById(R.id.search_food_button)
+        addMealButton = findViewById(R.id.add_meal_button)
         searchFoodEditText = findViewById(R.id.search_food_edit_text)
         foodItemsListView = findViewById(R.id.food_items_list_view)
 
         searchFoodButton.setOnClickListener(this)
+        addMealButton.setOnClickListener(this)
     }
 
     override fun onClick(v: View) {
         when (v) {
             searchFoodButton -> searchFood()
+            addMealButton -> cancel()
         }
     }
 
@@ -45,13 +49,13 @@ class SearchFoodDialog(c: Activity, themeResId: Int) : Dialog(c, themeResId), Vi
         val stringRequest = StringRequest(
             Request.Method.GET,
             url,
-            { response -> tmpFunc(response) },
+            { response -> parseQueryResults(response) },
             { error -> Log.d(TAG, "got error: ${error.message}") })
         queue.add(stringRequest)
     }
 
-    private fun tmpFunc(response: String) {
-        Log.d(TAG, "tmpFunc: $response")
+    private fun parseQueryResults(response: String) {
+        Log.d(TAG, "parseQueryResults: $response")
         foodList = Food.getRecipesFromRequest(response)
         val adapter = FoodAdapter(context, foodList)
         foodItemsListView.adapter = adapter

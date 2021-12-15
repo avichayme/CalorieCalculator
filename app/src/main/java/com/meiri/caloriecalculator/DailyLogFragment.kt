@@ -30,6 +30,9 @@ class DailyLogFragment : Fragment(), View.OnClickListener, RadioGroup.OnCheckedC
     private lateinit var dailyConsumptionListView: ListView
     private lateinit var waterProgressBar: WaterProgressBar
     private lateinit var calorieConsumptionTextView: TextView
+    private lateinit var minusTextView: TextView
+    private lateinit var plusTextView: TextView
+    private var dailyDrink = 0
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -48,10 +51,14 @@ class DailyLogFragment : Fragment(), View.OnClickListener, RadioGroup.OnCheckedC
         dailyConsumptionListView = inputFragmentView.findViewById(R.id.daily_consumption_list_view)
         waterProgressBar = inputFragmentView.findViewById(R.id.water_progress_bar)
         calorieConsumptionTextView = inputFragmentView.findViewById(R.id.calorie_consumption_text_view)
+        minusTextView = inputFragmentView.findViewById(R.id.minus_text_view)
+        plusTextView = inputFragmentView.findViewById(R.id.plus_text_view)
 
         prevWeekImageView.setOnClickListener(this)
         nextWeekImageView.setOnClickListener(this)
         dayOfWeekPicker.setOnCheckedChangeListener(this)
+        minusTextView.setOnClickListener(this)
+        plusTextView.setOnClickListener(this)
 
         setDateView()
         getUserLog()
@@ -88,21 +95,40 @@ class DailyLogFragment : Fragment(), View.OnClickListener, RadioGroup.OnCheckedC
     }
 
     override fun onClick(v: View?) {
-        when(v!!.id) {
-            R.id.prev_week_button -> cal.set(Calendar.WEEK_OF_YEAR,
-                cal.get(Calendar.WEEK_OF_YEAR) - 1)
-            R.id.next_week_button -> cal.set(Calendar.WEEK_OF_YEAR,
-                cal.get(Calendar.WEEK_OF_YEAR) + 1)
+        when (v!!.id) {
+            R.id.prev_week_button -> {
+                cal.set(Calendar.WEEK_OF_YEAR, cal.get(Calendar.WEEK_OF_YEAR) - 1)
+                setDateView()
+                clearDailyLog()
+            }
+            R.id.next_week_button -> {
+                cal.set(Calendar.WEEK_OF_YEAR, cal.get(Calendar.WEEK_OF_YEAR) + 1)
+                setDateView()
+                clearDailyLog()
+            }
+            R.id.plus_text_view -> addCups(1)
+            R.id.minus_text_view -> addCups(-1)
         }
-        setDateView()
-        clearDailyLog()
+    }
+
+    private fun addCups(cups: Int) {
+        val uid = MainActivity.getUser().userId
+        val sdf = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+        val date = sdf.format(cal.time)
+        dailyDrink += cups
+        if (dailyDrink < 0)
+            dailyDrink = 0
+        if (dailyDrink > 8)
+            dailyDrink = 8
+        mealsRef.child(uid).child(date).child("drink").setValue(dailyDrink)
+        showDailyLog()
     }
 
     override fun onCheckedChanged(group: RadioGroup?, checkedId: Int) {
         if (checkedId == -1) return
-        val checkedRadioButton = group!!.findViewById(checkedId) as RadioButton
-        if (!checkedRadioButton.isChecked) return
         if (group == dayOfWeekPicker) {
+            val checkedRadioButton = group.findViewById(checkedId) as RadioButton
+            if (!checkedRadioButton.isChecked) return
             when (checkedId) {
                 R.id.sunday_button -> cal.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY)
                 R.id.monday_button -> cal.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY)
@@ -124,7 +150,17 @@ class DailyLogFragment : Fragment(), View.OnClickListener, RadioGroup.OnCheckedC
         val listener = object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 val uid = MainActivity.getUser().userId
-				userLog = dataSnapshot.child(uid)
+                val sdf = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+                val date = sdf.format(cal.time)
+                userLog = dataSnapshot.child(uid)
+                if (!userLog!!.child(date).hasChild("drink")) {
+                    dailyDrink = 0
+                    mealsRef.child(uid).child(date).child("drink").setValue(dailyDrink)
+                    mealsRef.push()
+                } else {
+                    val ti2 = object : GenericTypeIndicator<Int>() {}
+                    dailyDrink = userLog?.child(date)?.child("drink")?.getValue(ti2)!!
+                }
                 showDailyLog()
             }
 
@@ -140,19 +176,19 @@ class DailyLogFragment : Fragment(), View.OnClickListener, RadioGroup.OnCheckedC
         val date = sdf.format(cal.time)
         if (userLog?.hasChild(date) == true) {
             val ti1 = object : GenericTypeIndicator<HashMap<String, ArrayList<Food>>>() {}
-            val ti2 = object : GenericTypeIndicator<Int>() {}
+
             val dailyMeal = userLog?.child(date)?.child("food")?.getValue(ti1)!!
-            val dailyDrink = userLog?.child(date)?.child("drink")?.getValue(ti2)!!
-            val dailyCalorieConsumption = (dailyMeal.values.map { (it.map { f -> f.calories }).sum() }).sum()
+            val dailyCalorieConsumption =
+                (dailyMeal.values.map { (it.map { f -> f.calories }).sum() }).sum()
             val adapter = DailyLogAdapter(requireContext(), dailyMeal)
             dailyConsumptionListView.adapter = adapter
-            calorieConsumptionTextView.text = "Total calorie consumption: ${dailyCalorieConsumption}/\${}"
-            waterProgressBar.xxx = dailyDrink
-        }
-        else {
+            calorieConsumptionTextView.text =
+                "Total calorie consumption: ${dailyCalorieConsumption}/${MainActivity.getUser().calories}"
+            waterProgressBar.counter = dailyDrink
+        } else {
             dailyConsumptionListView.adapter = DailyLogAdapter(requireContext(), HashMap())
-            calorieConsumptionTextView.text = "Total calorie consumption: 0/\${}"
-            waterProgressBar.xxx = 0
+            calorieConsumptionTextView.text = "Total calorie consumption: 0/0"
+            waterProgressBar.counter = 0
         }
     }
 

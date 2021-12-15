@@ -14,6 +14,7 @@ import androidx.fragment.app.Fragment
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import java.time.LocalDate
+import java.time.LocalTime
 import java.time.format.DateTimeFormatter
 
 class MealFragment : Fragment(), View.OnClickListener {
@@ -43,7 +44,13 @@ class MealFragment : Fragment(), View.OnClickListener {
         addMealButton.setOnClickListener(this)
         composeMealButton.setOnClickListener(this)
         mealDateEditText.addTextChangedListener(DateTextWatcher())
+        setCurrentDateTime()
         return inputFragmentView
+    }
+
+    private fun setCurrentDateTime() {
+        mealDateEditText.setText(LocalDate.now().format(MainActivity.getUser().formatter).replace("-", "/"))
+        mealTimeEditText.setText(LocalTime.now().format(DateTimeFormatter.ofPattern("H:m")))
     }
 
     override fun onClick(v: View?) {
@@ -56,7 +63,6 @@ class MealFragment : Fragment(), View.OnClickListener {
                 val foodItemsListView: ListView = cdd.findViewById(R.id.food_items_list_view)
                 foodItemsListView.onItemClickListener =
                     OnItemClickListener { _, _, position, _ ->
-                        Toast.makeText(requireActivity().applicationContext, "Click ListItem Number $position", Toast.LENGTH_LONG).show()
                         foodItemChangeMode(foodItemsListView.adapter.getItem(position) as Food)
                     }
 
@@ -77,14 +83,27 @@ class MealFragment : Fragment(), View.OnClickListener {
 
     private fun addMealToDB() {
         val userID = MainActivity.getUser().userId
-        val userMealDiary = mealDiary.child(userID).child(getLogTime())
-        userMealDiary.setValue(foodList)
-        mealDiary.push()
+        val logTime = getLogTime()
+        if (logTime != null) {
+            val userMealDiary = mealDiary.child(userID).child(logTime)
+            userMealDiary.setValue(foodList)
+            mealDiary.push()
+        }
     }
 
-    private fun getLogTime(): String {
+    private fun getLogTime(): String? {
+        if (!validDateAndTime()) {
+            Toast.makeText(context, "Date and Time are not valid", Toast.LENGTH_SHORT).show()
+            return null
+        }
         val date = LocalDate.parse(mealDateEditText.editableText, DateTimeFormatter.ofPattern("dd/MM/yyyy"))
-        return "${date}/${mealTimeEditText.editableText}"
+        return "${date}/food/${mealTimeEditText.editableText}"
+    }
+
+    private fun validDateAndTime(): Boolean {
+        if (mealDateEditText.editableText.isBlank() || mealTimeEditText.editableText.isBlank())
+            return false
+        return true
     }
 
     companion object {

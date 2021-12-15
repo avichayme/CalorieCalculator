@@ -13,7 +13,7 @@ class WaterProgressBar : View {
             initSegments()
         }
 
-    var xxx: Int = 4
+    var counter: Int = 4
         set(value) {
             field = value
             initSegments()
@@ -79,7 +79,7 @@ class WaterProgressBar : View {
 
     private fun initSegments() {
         this.segments.clear()
-        segments.addAll((1..segmentCount).map { Segment(it <= xxx) })
+        segments.addAll((1..segmentCount).map { Segment(it <= counter) })
         this.invalidate()
     }
 
@@ -90,12 +90,12 @@ class WaterProgressBar : View {
 
         val emptySegmentPaint = Paint().apply {
             style = Paint.Style.FILL
-            color = Color.YELLOW //segmentBackgroundColor
+            color = Color.WHITE //segmentBackgroundColor
         }
 
         val fullSegmentPaint = Paint().apply {
             style = Paint.Style.FILL
-            color = Color.BLUE //segmentSelectedBackgroundColor
+            color = Color.CYAN //segmentSelectedBackgroundColor
         }
 
         segments.forEachIndexed { index, segment ->
@@ -111,18 +111,18 @@ class WaterProgressBar : View {
         return Pair(rectangles, paints)
     }
 
-    private fun getDrawingComponents2(): MutableList<Bitmap> {
-        val glasses = mutableListOf<Bitmap>()
-        val emptyGlassBitmap = BitmapFactory.decodeResource(resources,R.drawable.empty_glass)
-        val fullGlassBitmap = BitmapFactory.decodeResource(resources,R.drawable.full_glass)
-
-        segments.forEach {
-            if (it.state == Segment.SegmentState.EMPTY)
-                glasses.add(emptyGlassBitmap)
-            else
-                glasses.add(fullGlassBitmap)
-        }
-
-        return  glasses
-    }
+//    private fun getDrawingComponents2(): MutableList<Bitmap> {
+//        val glasses = mutableListOf<Bitmap>()
+//        val emptyGlassBitmap = BitmapFactory.decodeResource(resources,R.drawable.empty_glass)
+//        val fullGlassBitmap = BitmapFactory.decodeResource(resources,R.drawable.full_glass)
+//
+//        segments.forEach {
+//            if (it.state == Segment.SegmentState.EMPTY)
+//                glasses.add(emptyGlassBitmap)
+//            else
+//                glasses.add(fullGlassBitmap)
+//        }
+//
+//        return  glasses
+//    }
 }

@@ -33,12 +33,18 @@ class User(val userId: String) {
                 age--
             return age
         }
+    private val bmr_male: Double
+        get() = (13.397 * weight + 4.799 * height - 5.677 * age + 88.362)
+    private val bmr_female: Double
+        get() = (9.247 * weight + 3.098 * height - 4.330 * age + 447.593)
     private val bmr: Double
-        get() = if (gender == Resources.getSystem()
-                .getString(R.string.male)
-        ) 13.397 * weight + 4.799 * height - 5.677 * age + 88.362 else 9.247 * weight + 3.098 * height - 4.330 * age + 447.593
+        get() {
+            if (gender == "Male")
+                return bmr_male
+            return bmr_female
+        }
     val calories: Double
-        get() = (bmr * activityFactor).roundToInt() / 100.0
+        get() = (bmr * activityFactor * 100).roundToInt() / 100.0
 
     private val usersRef = Firebase.database.getReference("users")
     val formatter = DateTimeFormatter.ofPattern("d-M-yyyy")

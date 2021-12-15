@@ -121,15 +121,39 @@
         android:id="@+id/water_progress_bar_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="horizontal"
         app:layout_constraintBottom_toTopOf="@id/calorie_consumption_text_view"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/daily_consumption_list_view">
 
+        <TextView
+            android:id="@+id/minus_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="4dp"
+            android:text="-"
+            android:textColor="#00FFFF"
+            android:textSize="36sp" />
+
         <com.meiri.caloriecalculator.WaterProgressBar
             android:id="@+id/water_progress_bar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="4dp"
+            android:layout_weight="8" />
+
+        <TextView
+            android:id="@+id/plus_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="4dp"
+            android:text="+"
+            android:textColor="#00FFFF"
+            android:textSize="36sp" />
     </LinearLayout>
 
     <TextView
