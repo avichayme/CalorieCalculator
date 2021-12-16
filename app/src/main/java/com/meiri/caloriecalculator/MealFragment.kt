@@ -88,6 +88,9 @@ class MealFragment : Fragment(), View.OnClickListener {
             val userMealDiary = mealDiary.child(userID).child(logTime)
             userMealDiary.setValue(foodList)
             mealDiary.push()
+            foodList.clear()
+            val adapter = FoodAdapter(requireActivity().applicationContext, foodList)
+            selectedFoodItemsListView.adapter = adapter
         }
     }
 

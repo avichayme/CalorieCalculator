@@ -13,6 +13,7 @@ import com.google.firebase.database.GenericTypeIndicator
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
+import java.lang.Exception
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
@@ -174,10 +175,11 @@ class DailyLogFragment : Fragment(), View.OnClickListener, RadioGroup.OnCheckedC
     private fun showDailyLog() {
         val sdf = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
         val date = sdf.format(cal.time)
-        if (userLog?.hasChild(date) == true) {
+        try {
             val ti1 = object : GenericTypeIndicator<HashMap<String, ArrayList<Food>>>() {}
 
-            val dailyMeal = userLog?.child(date)?.child("food")?.getValue(ti1)!!
+            var dailyMeal = userLog?.child(date)?.child("food")?.getValue(ti1)!!
+            dailyMeal = dailyMeal.toSortedMap().toMap() as HashMap<String, ArrayList<Food>>
             val dailyCalorieConsumption =
                 (dailyMeal.values.map { (it.map { f -> f.calories }).sum() }).sum()
             val adapter = DailyLogAdapter(requireContext(), dailyMeal)
@@ -185,7 +187,7 @@ class DailyLogFragment : Fragment(), View.OnClickListener, RadioGroup.OnCheckedC
             calorieConsumptionTextView.text =
                 "Total calorie consumption: ${dailyCalorieConsumption}/${MainActivity.getUser().calories}"
             waterProgressBar.counter = dailyDrink
-        } else {
+        } catch (e: Exception) {
             dailyConsumptionListView.adapter = DailyLogAdapter(requireContext(), HashMap())
             calorieConsumptionTextView.text = "Total calorie consumption: 0/0"
             waterProgressBar.counter = 0

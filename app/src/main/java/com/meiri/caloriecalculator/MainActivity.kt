@@ -187,9 +187,9 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         Log.i(TAG, "[startMainActivity]")
         welcomeLayout.visibility = View.GONE
         adapter = TabAdapter(supportFragmentManager)
-        adapter.addFragment(DailyLogFragment(), "Tab 1")
-        adapter.addFragment(MealFragment(), "Tab 2")
-        adapter.addFragment(UserSettingsFragment(), "Tab 3")
+        adapter.addFragment(DailyLogFragment(), "Daily Log")
+        adapter.addFragment(MealFragment(), "Log a Meal")
+        adapter.addFragment(UserSettingsFragment(), "User info.")
 
         viewPager.adapter = adapter
         tabLayout.setupWithViewPager(viewPager)

@@ -17,18 +17,18 @@
     <string name="female">Female</string>
     <string name="male">Male</string>
     <string name="af0_hint">1.2</string>
-    <string name="af0_text">1.2</string>
+    <string name="af0_text">Mostly sitting</string>
     <string name="af1_hint">1.375</string>
-    <string name="af1_text">1.375</string>
+    <string name="af1_text">Light active </string>
     <string name="af2_hint">1.55</string>
-    <string name="af2_text">1.55</string>
+    <string name="af2_text">Moderate active </string>
     <string name="af3_hint">1.725</string>
-    <string name="af3_text">1.725</string>
+    <string name="af3_text">Very active</string>
     <string name="af4_hint">1.9</string>
-    <string name="af4_text">1.9</string>
+    <string name="af4_text">Extra active</string>
     <string name="date_format">DD/MM/YYYY</string>
     <string name="lets_start">Let\'s Start!</string>
-    <string name="choose_activity_factor">Choose Activity Factor:</string>
+    <string name="choose_activity_factor">Choose Your Activity Factor:</string>
 
     <!-- Meals Menu -->
     <string name="add_meal">Add Meal</string>
