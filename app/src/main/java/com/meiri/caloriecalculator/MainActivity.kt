@@ -15,10 +15,12 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.SignInButton
 import com.google.android.gms.common.api.ApiException
+import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.gms.tasks.Task
 import com.google.android.material.tabs.TabLayout
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
+import com.google.firebase.messaging.FirebaseMessaging
 
 enum class State {LOGGED_OFF, LOGGED_IN, SIGN_UP, FULL_REGISTERED}
 
@@ -43,6 +45,19 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
         Log.d(TAG, "[onCreate] Starting Activity. State is ${state.name}")
         updateState()
+
+        FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
+            if (!task.isSuccessful) {
+                Log.w(TAG, "Fetching FCM registration token failed", task.exception)
+                return@OnCompleteListener
+            }
+
+            // Get new FCM registration token
+            val token = task.result
+
+            // Log
+            Log.d(TAG, "FCM registration Token: $token")
+        })
     }
 
     override fun onClick(v: View?) {

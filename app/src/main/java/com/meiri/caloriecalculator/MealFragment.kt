@@ -50,7 +50,7 @@ class MealFragment : Fragment(), View.OnClickListener {
 
     private fun setCurrentDateTime() {
         mealDateEditText.setText(LocalDate.now().format(MainActivity.getUser().formatter).replace("-", "/"))
-        mealTimeEditText.setText(LocalTime.now().format(DateTimeFormatter.ofPattern("H:m")))
+        mealTimeEditText.setText(LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm")))
     }
 
     override fun onClick(v: View?) {

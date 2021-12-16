@@ -99,13 +99,13 @@ class DailyLogFragment : Fragment(), View.OnClickListener, RadioGroup.OnCheckedC
         when (v!!.id) {
             R.id.prev_week_button -> {
                 cal.set(Calendar.WEEK_OF_YEAR, cal.get(Calendar.WEEK_OF_YEAR) - 1)
-                setDateView()
                 clearDailyLog()
+                setDateView()
             }
             R.id.next_week_button -> {
                 cal.set(Calendar.WEEK_OF_YEAR, cal.get(Calendar.WEEK_OF_YEAR) + 1)
-                setDateView()
                 clearDailyLog()
+                setDateView()
             }
             R.id.plus_text_view -> addCups(1)
             R.id.minus_text_view -> addCups(-1)
